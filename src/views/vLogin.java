@@ -4,15 +4,26 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import controllers.cLogin;
+import models.result;
+
+import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class vLogin {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textTaikhoan;
-	private JTextField textMatkhau;
+	private JPasswordField textMatkhau;
 
 	/**
 	 * Launch the application.
@@ -46,12 +57,12 @@ public class vLogin {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblDangnhap = new JLabel("Đăng nhập");
+		JLabel lblDangnhap = new JLabel("Dang nhap");
 		lblDangnhap.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblDangnhap.setBounds(158, 36, 134, 31);
 		frame.getContentPane().add(lblDangnhap);
 		
-		JLabel lblT = new JLabel("Tài khoản");
+		JLabel lblT = new JLabel("Tai khoan");
 		lblT.setBounds(65, 79, 66, 15);
 		frame.getContentPane().add(lblT);
 		
@@ -60,16 +71,44 @@ public class vLogin {
 		frame.getContentPane().add(textTaikhoan);
 		textTaikhoan.setColumns(10);
 		
-		JLabel lblMt = new JLabel("Mật khẩu");
+		JLabel lblMt = new JLabel("Mat khau");
 		lblMt.setBounds(65, 116, 66, 15);
 		frame.getContentPane().add(lblMt);
 		
-		textMatkhau = new JTextField();
+		textMatkhau = new JPasswordField();
+		textMatkhau.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
+					// function dangNhap
+					if(rs.isStatus()) {
+						frame.dispose();
+						vListStudent window = new vListStudent();
+						window.frame.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(frame, rs.getMessage());
+					}
+				}
+			}
+		});
 		textMatkhau.setBounds(149, 111, 196, 25);
 		frame.getContentPane().add(textMatkhau);
-		textMatkhau.setColumns(10);
 		
-		JButton btnDangnhap = new JButton("Đăng nhập");
+		JButton btnDangnhap = new JButton("Dang nhap");
+		btnDangnhap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
+				// function dangNhap
+				if(rs.isStatus()) {
+					frame.dispose();
+					vListStudent window = new vListStudent();
+					window.frame.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(frame, rs.getMessage());
+				}
+			}
+		});
 		btnDangnhap.setBounds(231, 148, 114, 25);
 		frame.getContentPane().add(btnDangnhap);
 	}

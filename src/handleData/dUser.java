@@ -27,7 +27,7 @@ public class dUser {
             		line += (char)k;
             	} else {
             		arrayLine = line.split("\\|");
-            		mUser user = new mUser(arrayLine[0], arrayLine[1], arrayLine[2]);
+            		mUser user = new mUser(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3]);
             		listUser.add(user);
             		line = "";
             	}
