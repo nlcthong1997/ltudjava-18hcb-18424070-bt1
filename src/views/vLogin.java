@@ -3,17 +3,16 @@ package views;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class vLogin {
 
 	private JFrame frame;
-	private JTextField usernameField;
-	private JPasswordField passwordField;
+	private JTextField textTaikhoan;
+	private JTextField textMatkhau;
 
 	/**
 	 * Launch the application.
@@ -47,30 +46,31 @@ public class vLogin {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		usernameField = new JTextField();
-		usernameField.setBounds(155, 70, 177, 28);
-		frame.getContentPane().add(usernameField);
-		usernameField.setColumns(10);
+		JLabel lblDangnhap = new JLabel("Đăng nhập");
+		lblDangnhap.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblDangnhap.setBounds(158, 36, 134, 31);
+		frame.getContentPane().add(lblDangnhap);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(156, 123, 176, 28);
-		frame.getContentPane().add(passwordField);
+		JLabel lblT = new JLabel("Tài khoản");
+		lblT.setBounds(65, 79, 66, 15);
+		frame.getContentPane().add(lblT);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(218, 175, 114, 25);
-		frame.getContentPane().add(btnLogin);
+		textTaikhoan = new JTextField();
+		textTaikhoan.setBounds(149, 74, 196, 25);
+		frame.getContentPane().add(textTaikhoan);
+		textTaikhoan.setColumns(10);
 		
-		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(72, 76, 90, 15);
-		frame.getContentPane().add(lblUsername);
+		JLabel lblMt = new JLabel("Mật khẩu");
+		lblMt.setBounds(65, 116, 66, 15);
+		frame.getContentPane().add(lblMt);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(72, 129, 66, 15);
-		frame.getContentPane().add(lblPassword);
+		textMatkhau = new JTextField();
+		textMatkhau.setBounds(149, 111, 196, 25);
+		frame.getContentPane().add(textMatkhau);
+		textMatkhau.setColumns(10);
 		
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblLogin.setBounds(192, 26, 103, 28);
-		frame.getContentPane().add(lblLogin);
+		JButton btnDangnhap = new JButton("Đăng nhập");
+		btnDangnhap.setBounds(231, 148, 114, 25);
+		frame.getContentPane().add(btnDangnhap);
 	}
 }
