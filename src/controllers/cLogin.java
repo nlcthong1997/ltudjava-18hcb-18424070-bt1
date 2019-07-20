@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import handleData.dUser;
 import models.mUser;
@@ -17,6 +16,7 @@ public class cLogin {
 			for(mUser user: dUser.getListUser()) {
 				if (user.getUsername().equals(taiKhoan) && user.getPassword().equals(matKhau)) {
 					rs = new result(true, "success", user.getId(), user.getType());
+					break;
 				} else {
 					rs = new result(false, "Tai khoan khong dung", "", "");
 				}
