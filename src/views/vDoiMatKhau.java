@@ -16,6 +16,8 @@ import models.result;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
@@ -59,7 +61,18 @@ public class vDoiMatKhau {
 	private void initialize(String id, String userName, String type) {
 		frame = new JFrame("Doi mat khau");
 		frame.setBounds(100, 100, 450, 300);
+//		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// handle close window
+//		frame.addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosed(WindowEvent e) {
+//            	vGiaoVu window = new vGiaoVu(id, userName, type);
+//				window.frame.setVisible(true);
+//                System.exit(0);
+//            }
+//        });
 
 		JLabel lblMatKhauMoi = new JLabel("Mat khau moi");
 
@@ -89,35 +102,59 @@ public class vDoiMatKhau {
 
 		JLabel lblDoiMatKhau = new JLabel("Doi mat khau");
 		lblDoiMatKhau.setFont(new Font("Dialog", Font.BOLD, 20));
+		
+		JButton btnQuayLai = new JButton("Quay lai");
+		btnQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				vGiaoVu window = new vGiaoVu(id, userName, type);
+				window.frame.setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addGap(37)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup().addComponent(lblMatKhauMoi)
-								.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE).addComponent(
-										txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addComponent(lblXacNhanMat)
-								.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE).addComponent(
-										txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(37)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblMatKhauMoi)
+							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+							.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblXacNhanMat)
+							.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+							.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnDoiMatKhau))
-				.addContainerGap(69, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addGap(144).addComponent(lblDoiMatKhau)
-						.addContainerGap(144, Short.MAX_VALUE)));
-		groupLayout
-				.setVerticalGroup(
-						groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(28).addComponent(lblDoiMatKhau)
-										.addGap(18)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 27,
-														GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblMatKhauMoi))
-										.addGap(18)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 27,
-														GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblXacNhanMat))
-										.addGap(27).addComponent(btnDoiMatKhau).addContainerGap(79, Short.MAX_VALUE)));
+					.addContainerGap(69, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(144)
+					.addComponent(lblDoiMatKhau)
+					.addContainerGap(144, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(314, Short.MAX_VALUE)
+					.addComponent(btnQuayLai)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lblDoiMatKhau)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMatKhauMoi))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblXacNhanMat))
+					.addGap(27)
+					.addComponent(btnDoiMatKhau)
+					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+					.addComponent(btnQuayLai)
+					.addContainerGap())
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }

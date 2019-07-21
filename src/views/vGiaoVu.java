@@ -82,12 +82,18 @@ public class vGiaoVu {
 		JButton btnDoimatkhau = new JButton("Doi mat khau");
 		btnDoimatkhau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
 				vDoiMatKhau window = new vDoiMatKhau(id, userName, type);
 				window.frame.setVisible(true);
 			}
 		});
 
 		JButton btnDangxuat = new JButton("Dang xuat");
+		btnDangxuat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 
 		JButton btnImpBangDiem = new JButton("Imp bang diem");
 		btnImpBangDiem.addActionListener(new ActionListener() {
