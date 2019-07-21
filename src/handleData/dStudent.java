@@ -1,6 +1,5 @@
 package handleData;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,10 +14,11 @@ public class dStudent {
 		try {
 			br = new BufferedReader(new FileReader("data/listStudent.txt"));
 			String line;
-			String arrayLine [];
+			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mStudent student = new mStudent(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4], arrayLine[5]);
+				mStudent student = new mStudent(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
+						arrayLine[5]);
 				listStudent.add(student);
 			}
 		} catch (IOException e) {
@@ -28,5 +28,5 @@ public class dStudent {
 		br.close();
 		return listStudent;
 	}
-	
+
 }
