@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import controllers.cGiaoVu;
 import controllers.cLogin;
 import models.result;
 
@@ -84,9 +85,13 @@ public class vLogin {
 					result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
 					// function dangNhap
 					if(rs.isStatus()) {
-						frame.dispose();
-						vListStudent window = new vListStudent();
-						window.frame.setVisible(true);
+						if (rs.getTypeUser().equals("gv")) {
+							frame.dispose();
+							vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+							window.frame.setVisible(true);
+						} else {
+							//sinh vien
+						}
 					} else {
 						JOptionPane.showMessageDialog(frame, rs.getMessage());
 					}
@@ -102,9 +107,13 @@ public class vLogin {
 				result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
 				// function dangNhap
 				if(rs.isStatus()) {
-					frame.dispose();
-					vListStudent window = new vListStudent();
-					window.frame.setVisible(true);
+					if (rs.getTypeUser().equals("gv")) {
+						frame.dispose();
+						vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+						window.frame.setVisible(true);
+					} else {
+						//sinh vien
+					}
 				} else {
 					JOptionPane.showMessageDialog(frame, rs.getMessage());
 				}

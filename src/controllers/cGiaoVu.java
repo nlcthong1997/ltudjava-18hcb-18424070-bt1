@@ -15,7 +15,7 @@ import javax.swing.filechooser.FileSystemView;
 import models.mStudent;
 import models.result;
 
-public class cListStudent {
+public class cGiaoVu {
 	public static result importCsvListStudent() throws IOException {
 		result rs = null;
 		
@@ -33,9 +33,9 @@ public class cListStudent {
 			ArrayList<mStudent> listStudent = readStudentCsv(path);
 			// write file
 			if(writeFile(listStudent)) {
-				rs = new result(true, "Import thanh cong.", "", "");
+				rs = new result(true, "Import thanh cong.", "", "", "");
 			} else {
-				rs = new result(false, "Import that bai.", "", "");
+				rs = new result(false, "Import that bai.", "", "", "");
 			}
 		}
 		return rs;

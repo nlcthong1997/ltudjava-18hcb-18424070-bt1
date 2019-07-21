@@ -5,13 +5,15 @@ public class result {
 	private String message;
 	private String idUser;
 	private String typeUser;
+	private String nameUser;
 
-	public result(boolean status, String message, String idUser, String typeUser) {
+	public result(boolean status, String message, String idUser, String typeUser, String nameUser) {
 		super();
 		this.status = status;
 		this.message = message;
 		this.idUser = idUser;
 		this.typeUser = typeUser;
+		this.nameUser = nameUser;
 	}
 
 	public boolean isStatus() {
@@ -45,4 +47,13 @@ public class result {
 	public void setTypeUser(String typeUser) {
 		this.typeUser = typeUser;
 	}
+	
+	public String getNameUser() {
+		return nameUser;
+	}
+
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
+	}
+
 }

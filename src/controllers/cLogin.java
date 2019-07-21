@@ -15,15 +15,15 @@ public class cLogin {
 		try {
 			for(mUser user: dUser.getListUser()) {
 				if (user.getUsername().equals(taiKhoan) && user.getPassword().equals(matKhau)) {
-					rs = new result(true, "success", user.getId(), user.getType());
+					rs = new result(true, "success", user.getId(), user.getType(), user.getUsername());
 					break;
 				} else {
-					rs = new result(false, "Tai khoan khong dung", "", "");
+					rs = new result(false, "Tai khoan khong dung", "", "", "");
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			rs = new result(false, e.getMessage(), "", "");
+			rs = new result(false, e.getMessage(), "", "", "");
 		}
 		return rs;
 	}
