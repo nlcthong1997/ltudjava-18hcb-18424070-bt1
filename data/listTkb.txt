@@ -1,4 +1,4 @@
-1,c32,18,CNPM,Cong nghe pham mem
-2,c33,18,KHMT,Khoa hoc may tinh
-3,c32,17,TRR,Toan roi rac
-4,c33,17,MMT,Mang may tinh
+1,18,CNPM,Cong nghe pham mem,c32
+2,18,KHMT,Khoa hoc may tinh,c33
+3,17,TRR,Toan roi rac,c32
+4,17,MMT,Mang may tinh,c33

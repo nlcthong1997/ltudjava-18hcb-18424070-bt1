@@ -22,7 +22,7 @@ public class dGiaoVu {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mStudent student = new mStudent(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
+				mStudent student = new mStudent(arrayLine[0], arrayLine[1], "", arrayLine[2], arrayLine[3], arrayLine[4],
 						arrayLine[5]);
 				listStudent.add(student);
 			}
@@ -42,8 +42,8 @@ public class dGiaoVu {
 			int currentLine = countLineFile(path);
 			for (mStudent student : listStudent) {
 				currentLine++;
-				String dataLine = Integer.toString(currentLine) + "," + student.getNienKhoa() + "," + student.getMssv()
-						+ "," + student.getHoTen() + "," + student.getGioiTinh() + "," + student.getCmnd();
+				String dataLine = Integer.toString(currentLine) + "," + student.getNienKhoa() + "," + student.getCacMon() + ","
+						+ student.getMssv() + "," + student.getHoTen() + "," + student.getGioiTinh() + "," + student.getCmnd();
 				if (currentLine == 1) {
 					bw.append(dataLine);
 				} else {

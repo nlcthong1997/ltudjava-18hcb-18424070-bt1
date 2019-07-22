@@ -70,6 +70,19 @@ public class vGiaoVu {
 		JLabel lblLop = new JLabel("Lop");
 
 		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//handles set value for combobox
+				try {
+					for(String lop: cGiaoVu.getListClass()) {
+						comboBox.addItem(lop);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		//handles set value for combobox
 		try {
 			for(String lop: cGiaoVu.getListClass()) {
@@ -78,7 +91,6 @@ public class vGiaoVu {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		JButton btnXemDsLop = new JButton("Xem DS lop");
 		btnXemDsLop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -124,9 +136,9 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("bangdiem");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -142,9 +154,9 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("dslop");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -158,9 +170,9 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("tkb");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

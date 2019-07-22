@@ -16,6 +16,7 @@ import models.result;
 
 import handleData.dGiaoVu;
 import handleData.dStudent;
+import handleData.dTkb;
 
 public class cGiaoVu {
 	public static result importCsv(String type) throws IOException {
@@ -49,6 +50,34 @@ public class cGiaoVu {
 					flag = true;
 				}
 			}
+			// auto mapping relationship
+			ArrayList<mStudent> listS = dStudent.getListStudent();
+			ArrayList<mTkb> listT = dTkb.getListTkb();
+			ArrayList<mStudent> listSNew = new ArrayList<mStudent>();
+			if (listS.size() != 0 && listT.size() != 0) {
+				for (mStudent student : listS) {
+					String cacMon = "";
+					for (mTkb tkb : listT) {
+						if (student.getNienKhoa().equals(tkb.getNienKhoa())) {
+							System.out.println(tkb.getMaMon());
+							System.out.println(tkb.getNienKhoa());
+							System.out.println(student.getNienKhoa());
+							cacMon += tkb.getMaMon() + "|";
+						}
+					}
+					if (cacMon != "") {
+						cacMon = cacMon.substring(0,cacMon.lastIndexOf("|"));	
+					}
+					mStudent studentNew = new mStudent(student.getStt(), student.getNienKhoa(), cacMon,
+							student.getMssv(), student.getHoTen(), student.getGioiTinh(), student.getCmnd());
+					listSNew.add(studentNew);
+				}
+				if (dStudent.writeListStudentNew(listSNew)) {
+					flag = true;
+				} else {
+					flag = false;
+				}
+			}
 		}
 		if (flag) {
 			rs = new result(true, "Import thanh cong.", "", "", "");
@@ -57,11 +86,11 @@ public class cGiaoVu {
 		}
 		return rs;
 	}
-	
-	public static ArrayList<String> getListClass () throws IOException {
+
+	public static ArrayList<String> getListClass() throws IOException {
 		ArrayList<String> listClass = new ArrayList<String>();
 		for (mStudent student : dStudent.getListStudent()) {
-			if(!listClass.contains(student.getNienKhoa())) {
+			if (!listClass.contains(student.getNienKhoa())) {
 				listClass.add(student.getNienKhoa());
 			}
 		}

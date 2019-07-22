@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -93,6 +94,18 @@ public class vDanhSachLop {
 		JButton btnXoa = new JButton("Xoa");
 
 		JButton btnSua = new JButton("Sua");
+		btnSua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int row = table.getSelectedRow();
+				if (row >= 0 ) {
+					
+				} else {
+					JOptionPane.showMessageDialog(frame, "Ban chua chon dong de sua.", "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+				}
+//				String value = table.getModel().getValueAt(row, column).toString();
+				System.out.println(row);
+			}
+		});
 
 		JButton btnQuayLai = new JButton("Quay lai");
 		btnQuayLai.addActionListener(new ActionListener() {
