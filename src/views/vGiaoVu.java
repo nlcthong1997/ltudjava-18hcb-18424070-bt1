@@ -69,9 +69,30 @@ public class vGiaoVu {
 
 		JLabel lblLop = new JLabel("Lop");
 
-		JComboBox comboBox = new JComboBox();
-
+		JComboBox<String> comboBox = new JComboBox<String>();
+		//handles set value for combobox
+		try {
+			for(String lop: cGiaoVu.getListClass()) {
+				comboBox.addItem(lop);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		JButton btnXemDsLop = new JButton("Xem DS lop");
+		btnXemDsLop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cbbSelected = (String) comboBox.getSelectedItem();
+				frame.dispose();
+				vDanhSachLop window;
+				try {
+					window = new vDanhSachLop(id, userName, type, cbbSelected);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				};
+			}
+		});
 
 		JButton btnThoikhoaabieu = new JButton("Xem Tkb");
 
@@ -193,12 +214,5 @@ public class vGiaoVu {
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnImpBangDiem)
 						.addContainerGap(31, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
-
-		String[] columnNames = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
-		Object[][] data = { { "Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false) },
-				{ "John", "Doe", "Rowing", new Integer(3), new Boolean(true) },
-				{ "Sue", "Black", "Knitting", new Integer(2), new Boolean(false) },
-				{ "Jane", "White", "Speed reading", new Integer(20), new Boolean(true) },
-				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
 	}
 }

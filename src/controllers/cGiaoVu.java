@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -14,6 +15,7 @@ import models.mTkb;
 import models.result;
 
 import handleData.dGiaoVu;
+import handleData.dStudent;
 
 public class cGiaoVu {
 	public static result importCsv(String type) throws IOException {
@@ -54,5 +56,16 @@ public class cGiaoVu {
 			rs = new result(false, "Import that bai.", "", "", "");
 		}
 		return rs;
+	}
+	
+	public static ArrayList<String> getListClass () throws IOException {
+		ArrayList<String> listClass = new ArrayList<String>();
+		for (mStudent student : dStudent.getListStudent()) {
+			if(!listClass.contains(student.getNienKhoa())) {
+				listClass.add(student.getNienKhoa());
+			}
+		}
+		Collections.sort(listClass);
+		return listClass;
 	}
 }
