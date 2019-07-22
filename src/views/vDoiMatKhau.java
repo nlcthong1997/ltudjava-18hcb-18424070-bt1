@@ -90,12 +90,14 @@ public class vDoiMatKhau {
 				if (matKhauMoi.equals(xacNhanMatKhau)) {
 					try {
 						result rs = cUser.doiMatKhau(id, userName, type, xacNhanMatKhau);
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						txtMatKhauMoi.setText(null);
+						txtXacNhanMatKhau.setText(null);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(frame, "Mat khau xac nhan khong dung");
+					JOptionPane.showMessageDialog(frame, "Mat khau xac nhan khong dung", "Thong bao", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

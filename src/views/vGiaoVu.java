@@ -91,7 +91,9 @@ public class vGiaoVu {
 		JButton btnDangxuat = new JButton("Dang xuat");
 		btnDangxuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				frame.dispose();
+				vLogin window = new vLogin();
+				window.frame.setVisible(true);
 			}
 		});
 
@@ -198,7 +200,5 @@ public class vGiaoVu {
 				{ "Sue", "Black", "Knitting", new Integer(2), new Boolean(false) },
 				{ "Jane", "White", "Speed reading", new Integer(20), new Boolean(true) },
 				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
-
-//		JOptionPane.showMessageDialog(frame, );
 	}
 }
