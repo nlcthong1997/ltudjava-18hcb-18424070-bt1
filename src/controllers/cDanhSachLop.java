@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import handleData.dStudent;
 import models.mStudent;
+import models.result;
 
 public class cDanhSachLop {
 	public static ArrayList<mStudent> getListStudentWithClass (String cLass) throws IOException {
@@ -15,5 +16,16 @@ public class cDanhSachLop {
 			}
 		}
 		return listStudentClass;
+	}
+	
+	//DanhSachLop_Them
+	public static result insertStudent (String[] infoStudent) throws IOException {
+		result rs = null;
+		if (dStudent.insertStudent(infoStudent)) {
+			rs = new result(true, "Them thanh cong.", "", "", "");
+		} else {
+			rs = new result(true, "Them that bai.", "", "", "");
+		}
+		return rs;
 	}
 }

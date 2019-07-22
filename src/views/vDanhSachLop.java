@@ -85,7 +85,8 @@ public class vDanhSachLop {
 		JButton btnThem = new JButton("Them");
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				vDanhSachLop_Them window = new vDanhSachLop_Them(id, userName, type, cLass);
+				window.frame.setVisible(true);
 			}
 		});
 

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.WindowConstants;
 
 import controllers.cUser;
 import models.result;
@@ -64,15 +65,21 @@ public class vDoiMatKhau {
 //		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// handle close window
-//		frame.addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosed(WindowEvent e) {
-//            	vGiaoVu window = new vGiaoVu(id, userName, type);
-//				window.frame.setVisible(true);
-//                System.exit(0);
-//            }
-//        });
+		//handle close window
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	int confirm = JOptionPane.showConfirmDialog(  
+                        frame,
+                        "Ban muon thoat chuong trinh" ,
+                        "Thong bao!",
+                        JOptionPane.YES_NO_OPTION);
+            	if (confirm == 0) {
+            		frame.dispose();
+            	}
+            }
+        });
 
 		JLabel lblMatKhauMoi = new JLabel("Mat khau moi");
 
