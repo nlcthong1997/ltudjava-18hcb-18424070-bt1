@@ -199,6 +199,78 @@ public class dStudent {
 		return flag;
 	}
 
+	// ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
+	public static boolean deleteStudent(String[] infoStudent) throws IOException {
+		BufferedReader br = null;
+		BufferedWriter bw = null;
+		boolean flag = false;
+		ArrayList<String> listStudent = new ArrayList<String>();
+		String nienKhoa_maMon[] = infoStudent[4].split("\\-");
+		try {
+			br = new BufferedReader(new FileReader("data/listStudent.txt"));
+			String line;
+			String arrLine[];
+			while ((line = br.readLine()) != null) {
+				arrLine = line.split("\\,");
+				// 7,17,18-CNPM,1722222,Nguyen Thi B,Nu,123456789
+				
+				// mssv, hoten, cmnd, giotinh
+				if (arrLine[3].equals(infoStudent[0]) && arrLine[4].equals(infoStudent[1])
+						&& arrLine[6].equals(infoStudent[3]) && arrLine[5].equals(infoStudent[3])) {
+
+					String arrayCacMon[] = arrLine[2].split("\\|");
+					boolean check_cungKhoa = Arrays.stream(arrayCacMon).anyMatch(infoStudent[4]::equals);
+					boolean check_khacKhoa = Arrays.stream(arrayCacMon).anyMatch(nienKhoa_maMon[1]::equals);
+					System.out.println(check_cungKhoa);
+					System.out.println(check_khacKhoa);
+					System.out.println(infoStudent[4]);
+					System.out.println(nienKhoa_maMon[1]);
+					String cacMonNew = "";
+					for (String mon : arrayCacMon) {
+						if (check_cungKhoa) {
+							if (mon != infoStudent[4]) {
+								cacMonNew += mon + "|";
+							}
+						} else {
+							if (mon != nienKhoa_maMon[1]) {
+								cacMonNew += mon + "|";
+							}
+						}
+					}
+
+					if (cacMonNew.length() == 1) {
+						line = arrLine[0] + "," + arrLine[1] + "," + "" + "," + arrLine[3] + "," + arrLine[4] + ","
+								+ arrLine[5] + "," + arrLine[6];
+					} else if (cacMonNew.length() > 1) {
+						cacMonNew = cacMonNew.substring(0, cacMonNew.lastIndexOf("|"));
+						line = arrLine[0] + "," + arrLine[1] + "," + cacMonNew + "," + arrLine[3] + "," + arrLine[4]
+								+ "," + arrLine[5] + "," + arrLine[6];
+					}
+				}
+				System.out.println(line);
+				listStudent.add(line);
+
+				bw = new BufferedWriter(new FileWriter("data/listStudent.txt"));
+				int i = 0;
+				for (String student : listStudent) {
+					if (i == 0) {
+						bw.append(student);
+					} else {
+						bw.append("\n" + student);
+					}
+					i++;
+				}
+			}
+			bw.flush();
+			bw.close();
+			flag = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		br.close();
+		return flag;
+	}
+
 	public static int countLineFile(String path) throws IOException {
 		int count = 0;
 		BufferedReader br = null;

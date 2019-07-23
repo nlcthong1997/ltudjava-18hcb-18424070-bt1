@@ -62,8 +62,21 @@ public class vDanhSachLop_Them {
 	 */
 	private void initialize(String id, String userName, String type, String cLass) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 447, 320);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setBounds(100, 100, 446, 386);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// handle close window
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(frame, "Ban muon thoat chuong trinh", "Thong bao!",
+						JOptionPane.YES_NO_OPTION);
+				if (confirm == 0) {
+					frame.dispose();
+				}
+			}
+		});
 
 		JLabel lblThemSinhVien = new JLabel("Them sinh vien");
 		lblThemSinhVien.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -102,7 +115,8 @@ public class vDanhSachLop_Them {
 					try {
 						result rs = cDanhSachLop.insertStudent(info);
 						if (rs.isStatus()) {
-							JOptionPane.showMessageDialog(frame, rs.getMessage());
+							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+									JOptionPane.INFORMATION_MESSAGE);
 							textMssv.setText(null);
 							textHoten.setText(null);
 							textGioiTinh.setText(null);
@@ -114,47 +128,81 @@ public class vDanhSachLop_Them {
 				}
 			}
 		});
+		
+		JButton btnQuayLai = new JButton("Quay lai");
+		btnQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				try {
+					vDanhSachLop window = new vDanhSachLop(id, userName, type, cLass);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(138).addComponent(lblThemSinhVien)
-						.addContainerGap(138, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
-						.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(btnThem))
-						.addGroup(groupLayout.createSequentialGroup().addGap(36).addGroup(groupLayout
-								.createParallelGroup(Alignment.TRAILING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(138)
+					.addComponent(lblThemSinhVien)
+					.addContainerGap(137, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnThem))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(36)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(lblCmnd).addComponent(lblHoTen).addComponent(lblMssv))
-										.addGap(25))
-								.addGroup(groupLayout.createSequentialGroup().addComponent(lblGioiTinh)
-										.addPreferredGap(ComponentPlacement.RELATED)))
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(textHoten, GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-										.addComponent(textGioiTinh, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 265,
-												Short.MAX_VALUE)
-										.addComponent(textCmnd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 265,
-												Short.MAX_VALUE)
-										.addComponent(textMssv, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 265,
-												Short.MAX_VALUE))))
-						.addGap(77)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(21).addComponent(lblThemSinhVien).addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblMssv)
-								.addComponent(textMssv, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblHoTen)
-								.addComponent(textHoten, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(
-								groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textGioiTinh, GroupLayout.PREFERRED_SIZE, 25,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblGioiTinh))
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblCmnd)
-								.addComponent(textCmnd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addGap(18).addComponent(btnThem).addContainerGap(74, Short.MAX_VALUE)));
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblCmnd)
+										.addComponent(lblHoTen)
+										.addComponent(lblMssv))
+									.addGap(25))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblGioiTinh)
+									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textHoten, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+								.addComponent(textGioiTinh, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+								.addComponent(textCmnd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+								.addComponent(textMssv, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))))
+					.addGap(77))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(310, Short.MAX_VALUE)
+					.addComponent(btnQuayLai)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(21)
+					.addComponent(lblThemSinhVien)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMssv)
+						.addComponent(textMssv, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblHoTen)
+						.addComponent(textHoten, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textGioiTinh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblGioiTinh))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCmnd)
+						.addComponent(textCmnd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(btnThem)
+					.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+					.addComponent(btnQuayLai)
+					.addContainerGap())
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }

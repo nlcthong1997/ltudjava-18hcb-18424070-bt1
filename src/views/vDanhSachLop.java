@@ -14,6 +14,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controllers.cDanhSachLop;
 import models.mStudent;
+import models.result;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -88,25 +89,39 @@ public class vDanhSachLop {
 		JButton btnThem = new JButton("Them");
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
 				vDanhSachLop_Them window = new vDanhSachLop_Them(id, userName, type, cLass);
 				window.frame.setVisible(true);
 			}
 		});
 
 		JButton btnXoa = new JButton("Xoa");
-
-		JButton btnSua = new JButton("Sua");
-		btnSua.addActionListener(new ActionListener() {
+		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				if (row >= 0) {
-
+					String mssv = table.getModel().getValueAt(row, 1).toString();
+					String hoTen = table.getModel().getValueAt(row, 2).toString();
+					String gioiTinh = table.getModel().getValueAt(row, 1).toString();
+					String cmnd = table.getModel().getValueAt(row, 1).toString();
+					String info[] = {mssv, hoTen, gioiTinh, cmnd, cLass};
+					try {
+						result rs = cDanhSachLop.deleteStudent(info);
+						if (rs.isStatus()) {
+							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+									JOptionPane.INFORMATION_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
 				} else {
 					JOptionPane.showMessageDialog(frame, "Ban chua chon dong de sua.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-//				String value = table.getModel().getValueAt(row, column).toString();
-				System.out.println(row);
 			}
 		});
 
@@ -120,28 +135,34 @@ public class vDanhSachLop {
 		});
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE).addGap(21)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+					.addGap(21)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnQuayLai, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnSua, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnXoa, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnThem, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-				.addContainerGap()));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-												.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 348,
-														Short.MAX_VALUE)
-												.addContainerGap())
-										.addGroup(groupLayout.createSequentialGroup().addComponent(btnThem)
-												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnXoa)
-												.addGap(12).addComponent(btnSua)
-												.addPreferredGap(ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
-												.addComponent(btnQuayLai).addGap(15)))));
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnThem)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnXoa)
+							.addPreferredGap(ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+							.addComponent(btnQuayLai)
+							.addGap(15))))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }

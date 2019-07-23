@@ -52,4 +52,14 @@ public class cDanhSachLop {
 		}
 		return rs;
 	}
+	
+	public static result deleteStudent(String[] infoStudent) throws IOException {
+		result rs = null;
+		if (dStudent.deleteStudent(infoStudent)) {
+			rs = new result(true, "Xoa thanh cong.", "", "", "");
+		} else {
+			rs = new result(true, "Xoa that bai.", "", "", "");
+		}
+		return rs;
+	}
 }
