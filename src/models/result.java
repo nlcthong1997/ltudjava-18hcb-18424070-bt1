@@ -47,7 +47,7 @@ public class result {
 	public void setTypeUser(String typeUser) {
 		this.typeUser = typeUser;
 	}
-	
+
 	public String getNameUser() {
 		return nameUser;
 	}

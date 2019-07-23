@@ -64,22 +64,19 @@ public class vDoiMatKhau {
 		frame.setBounds(100, 100, 450, 300);
 //		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//handle close window
+
+		// handle close window
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            	int confirm = JOptionPane.showConfirmDialog(  
-                        frame,
-                        "Ban muon thoat chuong trinh" ,
-                        "Thong bao!",
-                        JOptionPane.YES_NO_OPTION);
-            	if (confirm == 0) {
-            		frame.dispose();
-            	}
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(frame, "Ban muon thoat chuong trinh", "Thong bao!",
+						JOptionPane.YES_NO_OPTION);
+				if (confirm == 0) {
+					frame.dispose();
+				}
+			}
+		});
 
 		JLabel lblMatKhauMoi = new JLabel("Mat khau moi");
 
@@ -97,21 +94,23 @@ public class vDoiMatKhau {
 				if (matKhauMoi.equals(xacNhanMatKhau)) {
 					try {
 						result rs = cUser.doiMatKhau(id, userName, type, xacNhanMatKhau);
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 						txtMatKhauMoi.setText(null);
 						txtXacNhanMatKhau.setText(null);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(frame, "Mat khau xac nhan khong dung", "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Mat khau xac nhan khong dung", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
 
 		JLabel lblDoiMatKhau = new JLabel("Doi mat khau");
 		lblDoiMatKhau.setFont(new Font("Dialog", Font.BOLD, 20));
-		
+
 		JButton btnQuayLai = new JButton("Quay lai");
 		btnQuayLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -121,49 +120,38 @@ public class vDoiMatKhau {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(37)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblMatKhauMoi)
-							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-							.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblXacNhanMat)
-							.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-							.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addGap(37)
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup().addComponent(lblMatKhauMoi)
+								.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE).addComponent(
+										txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup().addComponent(lblXacNhanMat)
+								.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE).addComponent(
+										txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnDoiMatKhau))
-					.addContainerGap(69, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(144)
-					.addComponent(lblDoiMatKhau)
-					.addContainerGap(144, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(314, Short.MAX_VALUE)
-					.addComponent(btnQuayLai)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(28)
-					.addComponent(lblDoiMatKhau)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMatKhauMoi))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblXacNhanMat))
-					.addGap(27)
-					.addComponent(btnDoiMatKhau)
-					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-					.addComponent(btnQuayLai)
-					.addContainerGap())
-		);
+				.addContainerGap(69, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup().addGap(144).addComponent(lblDoiMatKhau)
+						.addContainerGap(144, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(314, Short.MAX_VALUE)
+						.addComponent(btnQuayLai).addContainerGap()));
+		groupLayout
+				.setVerticalGroup(
+						groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addGap(28).addComponent(lblDoiMatKhau)
+										.addGap(18)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(txtMatKhauMoi, GroupLayout.PREFERRED_SIZE, 27,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblMatKhauMoi))
+										.addGap(18)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(txtXacNhanMatKhau, GroupLayout.PREFERRED_SIZE, 27,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblXacNhanMat))
+										.addGap(27).addComponent(btnDoiMatKhau)
+										.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+										.addComponent(btnQuayLai).addContainerGap()));
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }

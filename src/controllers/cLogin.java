@@ -10,10 +10,10 @@ public class cLogin {
 	/*
 	 * Return ['status', 'message', 'id_user', 'type_user']
 	 */
-	public static result dangNhap (String taiKhoan, String matKhau) {
+	public static result dangNhap(String taiKhoan, String matKhau) {
 		result rs = null;
 		try {
-			for(mUser user: dUser.getListUser()) {
+			for (mUser user : dUser.getListUser()) {
 				if (user.getUsername().equals(taiKhoan) && user.getPassword().equals(matKhau)) {
 					rs = new result(true, "success", user.getId(), user.getType(), user.getUsername());
 					break;

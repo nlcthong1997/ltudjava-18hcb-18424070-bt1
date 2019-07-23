@@ -70,39 +70,21 @@ public class vGiaoVu {
 		JLabel lblLop = new JLabel("Lop");
 
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//handles set value for combobox
-				try {
-					for(String lop: cGiaoVu.getListClass()) {
-						comboBox.addItem(lop);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		//handles set value for combobox
-		try {
-			for(String lop: cGiaoVu.getListClass()) {
-				comboBox.addItem(lop);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// handle auto load data
+		loadCombobox(comboBox);
+
 		JButton btnXemDsLop = new JButton("Xem DS lop");
 		btnXemDsLop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String cbbSelected = (String) comboBox.getSelectedItem();
 				frame.dispose();
-				vDanhSachLop window;
 				try {
-					window = new vDanhSachLop(id, userName, type, cbbSelected);
+					vDanhSachLop window = new vDanhSachLop(id, userName, type, cbbSelected);
 					window.frame.setVisible(true);
 				} catch (IOException e) {
 					e.printStackTrace();
-				};
+				}
+				;
 			}
 		});
 
@@ -136,9 +118,11 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("bangdiem");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -154,10 +138,14 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("dslop");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
+					// handle auto load data
+					loadCombobox(comboBox);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -170,10 +158,14 @@ public class vGiaoVu {
 				try {
 					result rs = cGiaoVu.importCsv("tkb");
 					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
+					// handle auto load data
+					loadCombobox(comboBox);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -226,5 +218,17 @@ public class vGiaoVu {
 						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnImpBangDiem)
 						.addContainerGap(31, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
+	}
+
+	private void loadCombobox(JComboBox<String> comboBox) {
+		// handles set value for combobox
+		try {
+			comboBox.removeAllItems();
+			for (String cLass : cGiaoVu.getListClass()) {
+				comboBox.addItem(cLass);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

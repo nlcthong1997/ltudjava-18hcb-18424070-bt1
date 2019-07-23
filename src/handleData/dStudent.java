@@ -21,8 +21,8 @@ public class dStudent {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mStudent student = new mStudent(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3],
-						arrayLine[4], arrayLine[5], arrayLine[6]);
+				mStudent student = new mStudent(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
+						arrayLine[5], arrayLine[6]);
 				listStudent.add(student);
 			}
 		} catch (IOException e) {
@@ -32,7 +32,7 @@ public class dStudent {
 		br.close();
 		return listStudent;
 	}
-	
+
 	public static boolean writeListStudentNew(ArrayList<mStudent> listStudent) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag;
@@ -42,7 +42,8 @@ public class dStudent {
 			int currentLine = countLineFile(path);
 			for (mStudent student : listStudent) {
 				String dataLine = student.getStt() + "," + student.getNienKhoa() + "," + student.getCacMon() + ","
-						+ student.getMssv() + "," + student.getHoTen() + "," + student.getGioiTinh() + "," + student.getCmnd();
+						+ student.getMssv() + "," + student.getHoTen() + "," + student.getGioiTinh() + ","
+						+ student.getCmnd();
 				if (currentLine == 0) {
 					bw.append(dataLine);
 				} else {
@@ -58,18 +59,18 @@ public class dStudent {
 		bw.close();
 		return flag;
 	}
-	
+
 	// insert 1 student in file
 	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
-	public static boolean insertStudent (String[] infoStudent) throws IOException {
+	public static boolean insertStudent(String[] infoStudent) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag;
 		String path = "data/listStudent.txt";
 		try {
 			bw = new BufferedWriter(new FileWriter(path, true));
 			int currentLine = countLineFile(path);
-			String dataLine = "\n" + Integer.toString(currentLine + 1) + "," + infoStudent[4] + "," + infoStudent[0] + ","
-						+ infoStudent[1] + "," + infoStudent[2] + "," + infoStudent[3];
+			String dataLine = "\n" + Integer.toString(currentLine + 1) + "," + infoStudent[4] + "," + infoStudent[0]
+					+ "," + infoStudent[1] + "," + infoStudent[2] + "," + infoStudent[3];
 			if (currentLine == 0) {
 				bw.append(dataLine);
 			} else {
@@ -83,7 +84,7 @@ public class dStudent {
 		bw.close();
 		return flag;
 	}
-	
+
 	public static int countLineFile(String path) throws IOException {
 		int count = 0;
 		BufferedReader br = null;

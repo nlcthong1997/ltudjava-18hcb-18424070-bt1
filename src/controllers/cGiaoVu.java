@@ -66,7 +66,7 @@ public class cGiaoVu {
 						}
 					}
 					if (cacMon != "") {
-						cacMon = cacMon.substring(0,cacMon.lastIndexOf("|"));	
+						cacMon = cacMon.substring(0, cacMon.lastIndexOf("|"));
 					}
 					mStudent studentNew = new mStudent(student.getStt(), student.getNienKhoa(), cacMon,
 							student.getMssv(), student.getHoTen(), student.getGioiTinh(), student.getCmnd());
@@ -90,8 +90,13 @@ public class cGiaoVu {
 	public static ArrayList<String> getListClass() throws IOException {
 		ArrayList<String> listClass = new ArrayList<String>();
 		for (mStudent student : dStudent.getListStudent()) {
-			if (!listClass.contains(student.getNienKhoa())) {
-				listClass.add(student.getNienKhoa());
+			for (mTkb tkb : dTkb.getListTkb()) {
+				if (student.getNienKhoa().equals(tkb.getNienKhoa())) {
+					String classTkb = student.getNienKhoa() + "-" + tkb.getMaMon();
+					if (!listClass.contains(classTkb)) {
+						listClass.add(classTkb);
+					}
+				}
 			}
 		}
 		Collections.sort(listClass);

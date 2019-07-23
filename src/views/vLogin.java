@@ -58,39 +58,39 @@ public class vLogin {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblDangnhap = new JLabel("Dang nhap");
 		lblDangnhap.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblDangnhap.setBounds(158, 36, 134, 31);
 		frame.getContentPane().add(lblDangnhap);
-		
+
 		JLabel lblT = new JLabel("Tai khoan");
 		lblT.setBounds(65, 79, 66, 15);
 		frame.getContentPane().add(lblT);
-		
+
 		textTaikhoan = new JTextField();
 		textTaikhoan.setBounds(149, 74, 196, 25);
 		frame.getContentPane().add(textTaikhoan);
 		textTaikhoan.setColumns(10);
-		
+
 		JLabel lblMt = new JLabel("Mat khau");
 		lblMt.setBounds(65, 116, 66, 15);
 		frame.getContentPane().add(lblMt);
-		
+
 		textMatkhau = new JPasswordField();
 		textMatkhau.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
 					// function dangNhap
-					if(rs.isStatus()) {
+					if (rs.isStatus()) {
 						if (rs.getTypeUser().equals("gv")) {
 							frame.dispose();
 							vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 							window.frame.setVisible(true);
 						} else {
-							//sinh vien
+							// sinh vien
 						}
 					} else {
 						JOptionPane.showMessageDialog(frame, rs.getMessage());
@@ -100,19 +100,19 @@ public class vLogin {
 		});
 		textMatkhau.setBounds(149, 111, 196, 25);
 		frame.getContentPane().add(textMatkhau);
-		
+
 		JButton btnDangnhap = new JButton("Dang nhap");
 		btnDangnhap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				result rs = cLogin.dangNhap(textTaikhoan.getText(), textMatkhau.getText());
 				// function dangNhap
-				if(rs.isStatus()) {
+				if (rs.isStatus()) {
 					if (rs.getTypeUser().equals("gv")) {
 						frame.dispose();
 						vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 						window.frame.setVisible(true);
 					} else {
-						//sinh vien
+						// sinh vien
 					}
 				} else {
 					JOptionPane.showMessageDialog(frame, rs.getMessage());
