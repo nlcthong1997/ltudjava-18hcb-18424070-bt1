@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import models.mDiem;
 import models.mStudent;
@@ -60,28 +61,141 @@ public class dStudent {
 		return flag;
 	}
 
-	// insert 1 student in file
-	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
-	public static boolean insertStudent(String[] infoStudent) throws IOException {
+	// insert|Update student (cung nien khoa) in file
+	// infoStudent ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
+	public static boolean UpdateStudent(String[] infoStudent, String nienKhoa) throws IOException {
+		BufferedReader br = null;
 		BufferedWriter bw = null;
-		boolean flag;
-		String path = "data/listStudent.txt";
+		boolean flag = false;
+		ArrayList<String> listStudent = new ArrayList<String>();
 		try {
-			bw = new BufferedWriter(new FileWriter(path, true));
-			int currentLine = countLineFile(path);
-			String dataLine = "\n" + Integer.toString(currentLine + 1) + "," + infoStudent[4] + "," + infoStudent[0]
-					+ "," + infoStudent[1] + "," + infoStudent[2] + "," + infoStudent[3];
-			if (currentLine == 0) {
-				bw.append(dataLine);
-			} else {
-				bw.append(dataLine);
+			br = new BufferedReader(new FileReader("data/listStudent.txt"));
+			String line;
+			String arrLine[];
+			boolean exists = false;
+			String nienKhoa_maMon[] = infoStudent[4].split("\\-");
+			while ((line = br.readLine()) != null) {
+				arrLine = line.split("\\,");
+
+				String arrayCacMon[] = arrLine[2].split("\\|");
+
+				boolean check = Arrays.stream(arrayCacMon).anyMatch(nienKhoa_maMon[1]::equals);
+
+				// mssv=mssv
+				if (arrLine[3].equals(infoStudent[0])) {
+					// nienkhoa=nienkhoa, hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co
+					// trong cacMon
+					if (arrLine[1].equals(nienKhoa) && arrLine[4].toLowerCase().equals(infoStudent[1].toLowerCase())
+							&& arrLine[5].toLowerCase().equals(infoStudent[2].toLowerCase())
+							&& arrLine[6].equals(infoStudent[3]) && !check) {
+
+						line = arrLine[0] + "," + arrLine[1] + "," + arrLine[2] + "|" + nienKhoa_maMon[1] + ","
+								+ arrLine[3] + "," + arrLine[4] + "," + arrLine[5] + "," + arrLine[6];
+					}
+					// neu student duoc them chua co trong ds student
+					exists = true;
+				}
+				listStudent.add(line);
 			}
+
+			if (exists) {
+				bw = new BufferedWriter(new FileWriter("data/listStudent.txt"));
+				int i = 0;
+				for (String student : listStudent) {
+					if (i == 0) {
+						bw.append(student);
+					} else {
+						bw.append("\n" + student);
+					}
+					i++;
+				}
+			} else {
+				bw = new BufferedWriter(new FileWriter("data/listStudent.txt", true));
+				int currentLine = countLineFile("data/listStudent.txt");
+				String dataLine = Integer.toString(currentLine + 1) + "," + nienKhoa_maMon[0] + "," + nienKhoa_maMon[1]
+						+ "," + infoStudent[0] + "," + infoStudent[1] + "," + infoStudent[2] + "," + infoStudent[3];
+				if (currentLine == 0) {
+					bw.append(dataLine);
+				} else {
+					bw.append("\n" + dataLine);
+				}
+			}
+			bw.flush();
+			bw.close();
 			flag = true;
 		} catch (IOException e) {
-			flag = false;
 			e.printStackTrace();
 		}
-		bw.close();
+		br.close();
+		return flag;
+	}
+
+	// insert|Update student (khac nien khoa) in file
+	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
+	public static boolean insertStudent(String[] infoStudent) throws IOException {
+		BufferedReader br = null;
+		BufferedWriter bw = null;
+		boolean flag = false;
+		ArrayList<String> listStudent = new ArrayList<String>();
+		try {
+			br = new BufferedReader(new FileReader("data/listStudent.txt"));
+			String line;
+			String arrLine[];
+			boolean exists = false;
+			while ((line = br.readLine()) != null) {
+				arrLine = line.split("\\,");
+
+				String arrayCacMon[] = arrLine[2].split("\\|");
+
+				boolean check = Arrays.stream(arrayCacMon).anyMatch(infoStudent[4]::equals);
+
+				// mssv=mssv
+				if (arrLine[3].equals(infoStudent[0])) {
+					// hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co
+					// trong cacMon
+					if (arrLine[4].toLowerCase().equals(infoStudent[1].toLowerCase())
+							&& arrLine[5].toLowerCase().equals(infoStudent[2].toLowerCase())
+							&& arrLine[6].equals(infoStudent[3]) && !check) {
+
+						line = arrLine[0] + "," + arrLine[1] + "," + arrLine[2] + "|" + infoStudent[4] + ","
+								+ arrLine[3] + "," + arrLine[4] + "," + arrLine[5] + "," + arrLine[6];
+					}
+					// neu student duoc them chua co trong ds student
+					exists = true;
+				}
+				listStudent.add(line);
+			}
+
+			if (exists) {
+				bw = new BufferedWriter(new FileWriter("data/listStudent.txt"));
+				int i = 0;
+				for (String student : listStudent) {
+					if (i == 0) {
+						bw.append(student);
+					} else {
+						bw.append("\n" + student);
+					}
+					i++;
+				}
+			} else {
+				bw = new BufferedWriter(new FileWriter("data/listStudent.txt", true));
+				int currentLine = countLineFile("data/listStudent.txt");
+				String dataLine = Integer.toString(currentLine + 1) + "," + infoStudent[0].substring(0, 2) + ","
+						+ infoStudent[4] + "," + infoStudent[0] + "," + infoStudent[1] + "," + infoStudent[2] + ","
+						+ infoStudent[3];
+				if (currentLine == 0) {
+					bw.append(dataLine);
+				} else {
+					bw.append("\n" + dataLine);
+				}
+			}
+			bw.flush();
+			bw.close();
+			flag = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		br.close();
 		return flag;
 	}
 

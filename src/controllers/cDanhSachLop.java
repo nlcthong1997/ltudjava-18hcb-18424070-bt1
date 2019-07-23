@@ -20,8 +20,11 @@ public class cDanhSachLop {
 
 			// check ma_mon co thuoc cac mon ma sinh vien dang hoc ko
 			boolean check = Arrays.stream(arrayCacMon).anyMatch(arrayClass[1]::equals);
+			
+			// check sv cua khoa khac
+			boolean checkOther = Arrays.stream(arrayCacMon).anyMatch(cLass::equals);
 
-			if (student.getNienKhoa().equals(arrayClass[0]) && check) {
+			if ((student.getNienKhoa().equals(arrayClass[0]) && check) || checkOther) {
 				listStudentClass.add(student);
 			}
 		}
@@ -29,12 +32,23 @@ public class cDanhSachLop {
 	}
 
 	// DanhSachLop_Them
+	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
 	public static result insertStudent(String[] infoStudent) throws IOException {
 		result rs = null;
-		if (dStudent.insertStudent(infoStudent)) {
-			rs = new result(true, "Them thanh cong.", "", "", "");
+		String khoa = infoStudent[0].substring(0, 2);
+		String lop = infoStudent[4].substring(0, 2);
+		if (khoa.equals(lop)) {
+			if (dStudent.UpdateStudent(infoStudent, khoa)) {
+				rs = new result(true, "Them thanh cong.", "", "", "");
+			} else {
+				rs = new result(true, "Them that bai.", "", "", "");
+			}
 		} else {
-			rs = new result(true, "Them that bai.", "", "", "");
+			if (dStudent.insertStudent(infoStudent)) {
+				rs = new result(true, "Them thanh cong.", "", "", "");
+			} else {
+				rs = new result(true, "Them that bai.", "", "", "");
+			}
 		}
 		return rs;
 	}

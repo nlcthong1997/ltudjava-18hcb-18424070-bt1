@@ -91,20 +91,26 @@ public class vDanhSachLop_Them {
 		JButton btnThem = new JButton("Them");
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// format : ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
-				String[] info = new String[] { textMssv.getText(), textHoten.getText(), textGioiTinh.getText(),
-						textCmnd.getText(), cLass };
-				try {
-					result rs = cDanhSachLop.insertStudent(info);
-					if (rs.isStatus()) {
-						JOptionPane.showMessageDialog(frame, rs.getMessage());
-						textMssv.setText(null);
-						textHoten.setText(null);
-						textGioiTinh.setText(null);
-						textCmnd.setText(null);
+				// format : ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
+				if (textMssv.getText().equals("") || textHoten.getText().equals("") || textGioiTinh.getText().equals("")
+						|| textCmnd.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					String[] info = new String[] { textMssv.getText(), textHoten.getText(), textGioiTinh.getText(),
+							textCmnd.getText(), cLass };
+					try {
+						result rs = cDanhSachLop.insertStudent(info);
+						if (rs.isStatus()) {
+							JOptionPane.showMessageDialog(frame, rs.getMessage());
+							textMssv.setText(null);
+							textHoten.setText(null);
+							textGioiTinh.setText(null);
+							textCmnd.setText(null);
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		});

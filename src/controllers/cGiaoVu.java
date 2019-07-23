@@ -59,9 +59,6 @@ public class cGiaoVu {
 					String cacMon = "";
 					for (mTkb tkb : listT) {
 						if (student.getNienKhoa().equals(tkb.getNienKhoa())) {
-							System.out.println(tkb.getMaMon());
-							System.out.println(tkb.getNienKhoa());
-							System.out.println(student.getNienKhoa());
 							cacMon += tkb.getMaMon() + "|";
 						}
 					}
