@@ -84,7 +84,7 @@ public class cGiaoVu {
 		return rs;
 	}
 
-	public static ArrayList<String> getListClass() throws IOException {
+	public static ArrayList<String> getListClassWithSubjects() throws IOException {
 		ArrayList<String> listClass = new ArrayList<String>();
 		for (mStudent student : dStudent.getListStudent()) {
 			for (mTkb tkb : dTkb.getListTkb()) {
@@ -98,5 +98,16 @@ public class cGiaoVu {
 		}
 		Collections.sort(listClass);
 		return listClass;
+	}
+	
+	public static ArrayList<String> getListClass () throws IOException {
+		ArrayList<String> listclass = new ArrayList<String>();
+		for (mStudent student : dStudent.getListStudent()) {
+			if (!listclass.contains(student.getNienKhoa())) {
+				listclass.add(student.getNienKhoa());
+			}
+		}
+		Collections.sort(listclass);
+		return listclass;
 	}
 }

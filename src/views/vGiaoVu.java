@@ -4,27 +4,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JButton;
 
 import models.result;
 import controllers.cGiaoVu;
-import controllers.cUser;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import javax.swing.SpringLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class vGiaoVu {
 
@@ -64,14 +56,19 @@ public class vGiaoVu {
 	 */
 	private void initialize(String id, String userName, String type) {
 		frame = new JFrame("Giao vu - " + userName);
-		frame.setBounds(100, 100, 438, 319);
+		frame.setBounds(100, 100, 438, 373);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JLabel lblLop = new JLabel("Lop");
-
+		
+		
+		JLabel lblLop = new JLabel("Lop theo mon");
 		JComboBox<String> comboBox = new JComboBox<String>();
+		
+		JLabel lblLop_1 = new JLabel("Lop");
+		JComboBox<String> comboBoxLop = new JComboBox<String>();
+		
 		// handle auto load data
 		loadCombobox(comboBox);
+		loadComboboxLop(comboBoxLop);
 
 		JButton btnXemDsLop = new JButton("Xem DS lop");
 		btnXemDsLop.addActionListener(new ActionListener() {
@@ -87,8 +84,36 @@ public class vGiaoVu {
 				;
 			}
 		});
+		
+		JButton btnXemDsLopTheoKhoa = new JButton("Xem DS lop");
+		btnXemDsLopTheoKhoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+				frame.dispose();
+				try {
+					vDanhSachLopTheoKhoa window = new vDanhSachLopTheoKhoa(id, userName, type, cbbLopSelected);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
 
 		JButton btnThoikhoaabieu = new JButton("Xem Tkb");
+		btnThoikhoaabieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+				frame.dispose();
+				try {
+					vTkbTheoKhoa window = new vTkbTheoKhoa(id, userName, type, cbbLopSelected);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
 
 		JButton btnBangDiem = new JButton("Xem bang diem");
 
@@ -146,6 +171,8 @@ public class vGiaoVu {
 					}
 					// handle auto load data
 					loadCombobox(comboBox);
+					loadComboboxLop(comboBoxLop);
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -171,52 +198,77 @@ public class vGiaoVu {
 				}
 			}
 		});
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblLop)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(270)
+							.addComponent(btnDoiMatKhau, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblCanhan, Alignment.LEADING)
-												.addComponent(comboBox, Alignment.LEADING, 0, 237, Short.MAX_VALUE))
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblLop, Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(comboBox, 0, 246, Short.MAX_VALUE)
+										.addComponent(comboBoxLop, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblLop_1)
 										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnDangxuat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnDoimatkhau, Alignment.LEADING,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE)))
-								.addGap(18)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnImpTkb, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-										.addGroup(groupLayout.createSequentialGroup().addComponent(lblImport)
-												.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE))
-										.addComponent(btnThoikhoaabieu, 0, 147, Short.MAX_VALUE)
-										.addComponent(btnBangDiem, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-										.addComponent(btnXemDsLop, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-										.addComponent(btnDoiMatKhau, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-										.addComponent(btnImpBangDiem, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 147,
-												Short.MAX_VALUE))))
-				.addGap(24)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblLop)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnXemDsLop))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnThoikhoaabieu)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnBangDiem).addGap(30)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblCanhan)
-								.addComponent(lblImport))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnDoimatkhau)
-								.addComponent(btnDoiMatKhau))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnDangxuat)
-								.addComponent(btnImpTkb))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnImpBangDiem)
-						.addContainerGap(31, Short.MAX_VALUE)));
+											.addComponent(btnDangxuat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(lblCanhan, Alignment.LEADING)
+											.addComponent(btnDoimatkhau, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnImpTkb, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+										.addComponent(lblImport)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnXemDsLopTheoKhoa, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+											.addComponent(btnImpBangDiem, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+											.addComponent(btnBangDiem, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+											.addComponent(btnXemDsLop, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+											.addComponent(btnThoikhoaabieu, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)))))))
+					.addGap(23))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblLop)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnXemDsLop))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnBangDiem)
+					.addGap(17)
+					.addComponent(lblLop_1)
+					.addGap(7)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBoxLop, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnXemDsLopTheoKhoa))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnThoikhoaabieu)
+					.addGap(16)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCanhan)
+						.addComponent(lblImport))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnDoiMatKhau)
+						.addComponent(btnDoimatkhau))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnImpBangDiem)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(3)
+							.addComponent(btnDangxuat)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnImpTkb)
+					.addContainerGap(82, Short.MAX_VALUE))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
@@ -224,8 +276,20 @@ public class vGiaoVu {
 		// handles set value for combobox
 		try {
 			comboBox.removeAllItems();
-			for (String cLass : cGiaoVu.getListClass()) {
+			for (String cLass : cGiaoVu.getListClassWithSubjects()) {
 				comboBox.addItem(cLass);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void loadComboboxLop(JComboBox<String> comboBoxLop) {
+		// handles set value for combobox
+		try {
+			comboBoxLop.removeAllItems();
+			for (String cLass : cGiaoVu.getListClass()) {
+				comboBoxLop.addItem(cLass);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

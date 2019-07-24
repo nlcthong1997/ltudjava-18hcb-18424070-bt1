@@ -237,12 +237,10 @@ public class dStudent {
 						if (check_cungKhoa) {
 							if (!mon.equals(nienKhoa_maMon[1])) {
 								cacMonNew += mon + "|";
-								System.out.println("->" + cacMonNew);
 							}
 						} else {
 							if (!mon.equals(infoStudent[4])) {
 								cacMonNew += mon + "|";
-								System.out.println("=>" + cacMonNew);
 							}
 						}
 					}

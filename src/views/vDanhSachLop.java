@@ -67,7 +67,7 @@ public class vDanhSachLop {
 	private void initialize(String id, String userName, String type, String cLass) throws IOException {
 //	private void initialize() {
 		frame = new JFrame("Danh sach lop - " + cLass);
-		frame.setBounds(100, 100, 654, 402);
+		frame.setBounds(100, 100, 660, 406);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// handle close window
@@ -84,8 +84,7 @@ public class vDanhSachLop {
 		});
 
 		// handles table list student
-		ArrayList<mStudent> listStudentClass;
-		listStudentClass = cDanhSachLop.getListStudentWithClass(cLass);
+		ArrayList<mStudent> listStudentClass = cDanhSachLop.getListStudentWithClass(cLass);
 		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Gioi Tinh", "CMND" };
 		String[][] data = new String[listStudentClass.size()][5];
 		int i = 0;
@@ -97,7 +96,6 @@ public class vDanhSachLop {
 			data[i][4] = student.getCmnd();
 			i++;
 		}
-
 		table = new JTable(data, titles);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
