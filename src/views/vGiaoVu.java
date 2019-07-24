@@ -56,7 +56,7 @@ public class vGiaoVu {
 	 */
 	private void initialize(String id, String userName, String type) {
 		frame = new JFrame("Giao vu - " + userName);
-		frame.setBounds(100, 100, 438, 373);
+		frame.setBounds(100, 100, 428, 356);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -201,36 +201,33 @@ public class vGiaoVu {
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addGap(270)
-							.addComponent(btnDoiMatKhau, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblLop, Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(comboBox, 0, 246, Short.MAX_VALUE)
-										.addComponent(comboBoxLop, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblLop_1)
-										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(btnDangxuat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(lblCanhan, Alignment.LEADING)
-											.addComponent(btnDoimatkhau, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnImpTkb, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-										.addComponent(lblImport)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addComponent(btnXemDsLopTheoKhoa, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-											.addComponent(btnImpBangDiem, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-											.addComponent(btnBangDiem, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-											.addComponent(btnXemDsLop, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-											.addComponent(btnThoikhoaabieu, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)))))))
-					.addGap(23))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnDoiMatKhau, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblLop, Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(comboBox, 0, 256, Short.MAX_VALUE)
+									.addComponent(comboBoxLop, 0, 256, Short.MAX_VALUE)
+									.addComponent(lblLop_1)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(btnDangxuat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnDoimatkhau, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+									.addComponent(lblCanhan))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblImport)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(btnImpTkb, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnImpBangDiem, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnXemDsLopTheoKhoa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnBangDiem, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btnXemDsLop, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+										.addComponent(btnThoikhoaabieu, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+					.addGap(13))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -251,10 +248,10 @@ public class vGiaoVu {
 						.addComponent(btnXemDsLopTheoKhoa))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnThoikhoaabieu)
-					.addGap(16)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCanhan)
-						.addComponent(lblImport))
+						.addComponent(lblImport)
+						.addComponent(lblCanhan))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnDoiMatKhau)
@@ -267,7 +264,7 @@ public class vGiaoVu {
 							.addComponent(btnDangxuat)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnImpTkb)
-					.addContainerGap(82, Short.MAX_VALUE))
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
