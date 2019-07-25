@@ -17,4 +17,15 @@ public class cDiem {
 		}
 		return listDiem;
 	}
+	
+	public static ArrayList<mDiem> getListDiemDau(String cLass) throws IOException {
+		ArrayList<mDiem> listDiem = new ArrayList<mDiem>();
+		String nienKhoa_maMon[] = cLass.split("\\-");
+		for (mDiem diem : dDiem.getListDiem()) {
+			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1]) && (Integer.parseInt(diem.getDiemTong()) >= 5)) {
+				listDiem.add(diem);
+			}
+		}
+		return listDiem;
+	}
 }

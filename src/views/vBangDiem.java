@@ -83,6 +83,12 @@ public class vBangDiem {
 		JButton btnSua = new JButton("Sua diem");
 		
 		JButton btnDsDau = new JButton("DS dau");
+		btnDsDau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				vBangDiemDau window = new vBangDiemDau(id, userName, type, cLass);
+				window.frame.setVisible(true);
+			}
+		});
 		
 		JButton btnDsRot = new JButton("DS rot");
 		
