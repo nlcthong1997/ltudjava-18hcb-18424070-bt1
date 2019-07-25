@@ -85,17 +85,34 @@ public class vBangDiem {
 		JButton btnDsDau = new JButton("DS dau");
 		btnDsDau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				vBangDiemDau window = new vBangDiemDau(id, userName, type, cLass);
-				window.frame.setVisible(true);
+				
+				try {
+					vBangDiemDau window = new vBangDiemDau(id, userName, type, cLass);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
 		JButton btnDsRot = new JButton("DS rot");
-		
-		JLabel lblTileDau = new JLabel("New label");
+		btnDsRot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					vBangDiemRot window = new vBangDiemRot(id, userName, type, cLass);
+					window.frame.setVisible(true);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		String diemPerCent[] = cDiem.getDiemPercent(cLass);
+		JLabel lblTileDau = new JLabel("Ti le dau: " + diemPerCent[0] + "%");
 		lblTileDau.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel lblTileRot = new JLabel("New label");
+		JLabel lblTileRot = new JLabel("Ti le rot: " + diemPerCent[1] + "%");
 		
 		JButton btnQuayLai = new JButton("Quay lai");
 		btnQuayLai.addActionListener(new ActionListener() {

@@ -59,7 +59,7 @@ public class vGiaoVu {
 	 */
 	private void initialize(String id, String userName, String type) {
 		frame = new JFrame("Giao vu - " + userName);
-		frame.setBounds(100, 100, 428, 356);
+		frame.setBounds(100, 100, 428, 376);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// handle close window
