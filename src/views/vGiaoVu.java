@@ -4,12 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 
 import models.result;
 import controllers.cGiaoVu;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
@@ -59,10 +62,23 @@ public class vGiaoVu {
 		frame.setBounds(100, 100, 428, 356);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		// handle close window
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(frame, "Ban muon thoat chuong trinh", "Thong bao!",
+						JOptionPane.YES_NO_OPTION);
+				if (confirm == 0) {
+					frame.dispose();
+				}
+			}
+		});
 		
 		JLabel lblLop = new JLabel("Lop theo mon");
 		JComboBox<String> comboBox = new JComboBox<String>();
 		
+		//lop theo khoa
 		JLabel lblLop_1 = new JLabel("Lop");
 		JComboBox<String> comboBoxLop = new JComboBox<String>();
 		
@@ -116,6 +132,18 @@ public class vGiaoVu {
 		});
 
 		JButton btnBangDiem = new JButton("Xem bang diem");
+		btnBangDiem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cbbSelected = (String) comboBox.getSelectedItem();
+				frame.dispose();
+				try {
+					vBangDiem window = new vBangDiem(id, userName, type, cbbSelected);
+					window.frame.setVisible(true);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		JLabel lblCanhan = new JLabel("Ca nhan");
 

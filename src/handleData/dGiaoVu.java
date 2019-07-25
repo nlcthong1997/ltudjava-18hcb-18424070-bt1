@@ -117,7 +117,7 @@ public class dGiaoVu {
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
 				mDiem diem = new mDiem(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
-						arrayLine[5], arrayLine[6]);
+						arrayLine[5], arrayLine[6], arrayLine[7], arrayLine[8]);
 				listBangDiem.add(diem);
 			}
 		} catch (IOException e) {
@@ -137,7 +137,8 @@ public class dGiaoVu {
 			for (mDiem diem : listBangDiem) {
 				currentLine++;
 				String dataLine = Integer.toString(currentLine) + "," + diem.getNienKhoa() + "," + diem.getMaMon() + ","
-						+ diem.getMssv() + "," + diem.getHoTen() + "," + diem.getGioiTinh() + "," + diem.getCmnd();
+						+ diem.getMssv() + "," + diem.getHoTen() + "," + diem.getDiemGk() + "," + diem.getDiemCk() + ","
+						+ diem.getDiemKhac() + "," + diem.getDiemTong();
 				if (currentLine == 1) {
 					bw.append(dataLine);
 				} else {

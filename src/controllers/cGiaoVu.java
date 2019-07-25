@@ -23,7 +23,15 @@ public class cGiaoVu {
 		result rs = null;
 
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-		jfc.setDialogTitle("Select an image");
+		if (type.equals("dslop")) {
+			jfc.setDialogTitle("Import danh sach lop");
+		}
+		if (type.equals("tkb")) {
+			jfc.setDialogTitle("Import thoi khoa bieu");
+		}
+		if (type.equals("bangdiem")) {
+			jfc.setDialogTitle("Import bang diem");
+		}
 		jfc.setAcceptAllFileFilterUsed(false);
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Choose file *.csv or *.txt", "csv", "txt");
 		jfc.addChoosableFileFilter(filter);

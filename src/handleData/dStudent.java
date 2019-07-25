@@ -148,7 +148,6 @@ public class dStudent {
 				String arrayCacMon[] = arrLine[2].split("\\|");
 
 				boolean check = Arrays.stream(arrayCacMon).anyMatch(infoStudent[4]::equals);
-				System.out.println(check);
 				// mssv=mssv
 				if (arrLine[3].equals(infoStudent[0])) {
 					// hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co
