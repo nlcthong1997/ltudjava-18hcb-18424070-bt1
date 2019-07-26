@@ -15,6 +15,7 @@ import controllers.cDanhSachLop;
 import controllers.cDiem;
 import models.mDiem;
 import models.mStudent;
+import models.result;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -81,6 +82,28 @@ public class vBangDiem {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnSua = new JButton("Sua diem");
+		btnSua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int row = table.getSelectedRow();
+				if (row >= 0) {
+					String stt = table.getModel().getValueAt(row, 0).toString();
+					String mssv = table.getModel().getValueAt(row, 1).toString();
+					String hoTen = table.getModel().getValueAt(row, 2).toString();
+					String diemGK = table.getModel().getValueAt(row, 3).toString();
+					String diemCK = table.getModel().getValueAt(row, 4).toString();
+					String diemKhac = table.getModel().getValueAt(row, 5).toString();
+					String diemTong = table.getModel().getValueAt(row, 6).toString();
+					String info[] = { stt, mssv, hoTen, diemGK, diemCK, diemKhac, diemTong, cLass };
+					frame.dispose();
+					vBangDiem_Sua window = new vBangDiem_Sua(id, userName, type, info);
+					window.frame.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Ban chua chon dong de xoa.", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+			}
+		});
 		
 		JButton btnDsDau = new JButton("DS dau");
 		btnDsDau.addActionListener(new ActionListener() {

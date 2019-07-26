@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import models.mUser;
 
 public class dUser {
+	/**
+	 * Function: getListUser 
+	 * return ArrayList<mUser> listUser[ line, line1, ... ]
+	 * String line = "stt, username, password, type"
+	 */
 	public static ArrayList<mUser> getListUser() throws IOException {
-		// create list user
 		ArrayList<mUser> listUser = new ArrayList<mUser>();
 		BufferedReader br = null;
 		try {
@@ -20,7 +24,6 @@ public class dUser {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-//				System.out.println("test: " + arrayLine[0] + " " + arrayLine[1] + " " + arrayLine[2] + " " + arrayLine[3]);
 				mUser user = new mUser(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3]);
 				listUser.add(user);
 			}
@@ -32,6 +35,10 @@ public class dUser {
 		return listUser;
 	}
 
+	/**
+	 * Function: doiMatKhau Input function: (stt, username, password, type) 
+	 * return boolean true/false
+	 */
 	public static boolean doiMatKhau(String id, String userName, String type, String matKhau) throws IOException {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
@@ -45,6 +52,7 @@ public class dUser {
 			while ((line = br.readLine()) != null) {
 				if (line.contains(lineCompare)) {
 					line = line.replace(line, lineReplace);
+					flag = true;
 				}
 				listUser.add(line);
 			}
@@ -61,7 +69,6 @@ public class dUser {
 			}
 			bw.flush();
 			bw.close();
-			flag = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

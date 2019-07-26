@@ -13,6 +13,11 @@ import models.mStudent;
 import models.mTkb;
 
 public class dStudent {
+	/**
+	 * Function: getListStudent 
+	 * return ArrayList<mStudent> listStudent[ line, line1, ... ]
+	 * 		  String line = "stt, nienKhoa, cacMon, mssv, hoTen, gioiTinh, cmnd"
+	 */
 	public static ArrayList<mStudent> getListStudent() throws IOException {
 		ArrayList<mStudent> listStudent = new ArrayList<mStudent>();
 		BufferedReader br = null;
@@ -33,7 +38,13 @@ public class dStudent {
 		br.close();
 		return listStudent;
 	}
-
+	
+	/**
+	 * Function: writeListStudentNew (write file student)
+	 * Format request: ArrayList<mStudent> listStudent[ line, line1, ... ]
+	 * 		  		   String line = "stt, nienKhoa, cacMon, mssv, hoTen, gioiTinh, cmnd"
+	 * return boolean true/false
+	 */
 	public static boolean writeListStudentNew(ArrayList<mStudent> listStudent) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag;
@@ -61,8 +72,11 @@ public class dStudent {
 		return flag;
 	}
 
-	// insert|Update student (cung nien khoa) in file
-	// infoStudent ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
+	/**
+	 *Function: UpdateStudent (update cacMon for student when student learn class same nienKhoa)
+	 *Format request: infoStudent[] = { "mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon" }
+	 *return boolean true/false
+	 */
 	public static boolean UpdateStudent(String[] infoStudent, String nienKhoa) throws IOException {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
@@ -81,10 +95,12 @@ public class dStudent {
 
 				boolean check = Arrays.stream(arrayCacMon).anyMatch(nienKhoa_maMon[1]::equals);
 
-				// mssv=mssv
+				// check same mssv
 				if (arrLine[3].equals(infoStudent[0])) {
-					// nienkhoa=nienkhoa, hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co
-					// trong cacMon
+					
+					//check conditions and check maMon(new) already exists in cacMon of student ?
+					// nienkhoa=nienkhoa, hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co trong cacMon
+					// format cacMon ex; CNPM|MMT|...
 					if (arrLine[1].equals(nienKhoa) && arrLine[4].toLowerCase().equals(infoStudent[1].toLowerCase())
 							&& arrLine[5].toLowerCase().equals(infoStudent[2].toLowerCase())
 							&& arrLine[6].equals(infoStudent[3]) && !check) {
@@ -92,7 +108,7 @@ public class dStudent {
 						line = arrLine[0] + "," + arrLine[1] + "," + arrLine[2] + "|" + nienKhoa_maMon[1] + ","
 								+ arrLine[3] + "," + arrLine[4] + "," + arrLine[5] + "," + arrLine[6];
 					}
-					// neu student duoc them chua co trong ds student
+					// if student already exists in listStudent
 					exists = true;
 				}
 				listStudent.add(line);
@@ -109,7 +125,9 @@ public class dStudent {
 					}
 					i++;
 				}
+				flag = true;
 			} else {
+				// if student donn't exists in listStudent
 				bw = new BufferedWriter(new FileWriter("data/listStudent.txt", true));
 				int currentLine = countLineFile("data/listStudent.txt");
 				String dataLine = Integer.toString(currentLine + 1) + "," + nienKhoa_maMon[0] + "," + nienKhoa_maMon[1]
@@ -119,10 +137,10 @@ public class dStudent {
 				} else {
 					bw.append("\n" + dataLine);
 				}
+				flag = true;
 			}
 			bw.flush();
 			bw.close();
-			flag = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -130,8 +148,11 @@ public class dStudent {
 		return flag;
 	}
 
-	// insert|Update student (khac nien khoa) in file
-	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
+	/**
+	 *Function: insertStudent (update cacMon for student when student learn class differ nienKhoa)
+	 *Format request: infoStudent[] = { "mssv", "hoTen", "gioi tinh", "cmmd", "nienkhoa_maMon" }
+	 *return boolean true/false
+	 */
 	public static boolean insertStudent(String[] infoStudent) throws IOException {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
@@ -148,10 +169,12 @@ public class dStudent {
 				String arrayCacMon[] = arrLine[2].split("\\|");
 
 				boolean check = Arrays.stream(arrayCacMon).anyMatch(infoStudent[4]::equals);
-				// mssv=mssv
+				// check same mssv
 				if (arrLine[3].equals(infoStudent[0])) {
-					// hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co
-					// trong cacMon
+					
+					// check conditions and check maMon(new) already exists in cacMon of student ?
+					// hoten=hoten, gioitinh=gioitinh, cmnd=cmnd, maMon ko co trong cacMon
+					// format cacMon ex: MMT|18-CNPM|18-DLCM
 					if (arrLine[4].toLowerCase().equals(infoStudent[1].toLowerCase())
 							&& arrLine[5].toLowerCase().equals(infoStudent[2].toLowerCase())
 							&& arrLine[6].equals(infoStudent[3]) && !check) {
@@ -159,7 +182,7 @@ public class dStudent {
 						line = arrLine[0] + "," + arrLine[1] + "," + arrLine[2] + "|" + infoStudent[4] + ","
 								+ arrLine[3] + "," + arrLine[4] + "," + arrLine[5] + "," + arrLine[6];
 					}
-					// neu student duoc them chua co trong ds student
+					// if student already exists in listStudent
 					exists = true;
 				}
 				listStudent.add(line);
@@ -176,7 +199,9 @@ public class dStudent {
 					}
 					i++;
 				}
+				flag = true;
 			} else {
+				// if student don't exists in listStudent
 				bw = new BufferedWriter(new FileWriter("data/listStudent.txt", true));
 				int currentLine = countLineFile("data/listStudent.txt");
 				String dataLine = Integer.toString(currentLine + 1) + "," + infoStudent[0].substring(0, 2) + ","
@@ -187,10 +212,10 @@ public class dStudent {
 				} else {
 					bw.append("\n" + dataLine);
 				}
+				flag = true;
 			}
 			bw.flush();
 			bw.close();
-			flag = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -198,7 +223,11 @@ public class dStudent {
 		return flag;
 	}
 
-	// ["mssv", "hoten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
+	/**
+	 * Function: deleteStudent
+	 * Format request: infoStudent[] = {"mssv", "hoTen", "gioiTinh", "cmmd", "nienkhoa_maMon"}
+	 * Format arrLine[] = { stt, nienKhoa, cacMon, mssv, hoTen, gioiTinh, cmnd }
+	 */
 	public static boolean deleteStudent(String[] infoStudent) throws IOException {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
@@ -230,8 +259,7 @@ public class dStudent {
 
 					String cacMonNew = "";
 
-					// Duyet qua cac mon duoi DB neu mon nao khac voi mon duoc yeu cau xoa
-					// (req.maMon) thi giu lai
+					// Duyet qua cac mon duoi DB neu mon nao khac voi mon duoc yeu cau xoa (req.maMon) thi giu lai
 					for (String mon : arrayCacMon) {
 						if (check_cungKhoa) {
 							if (!mon.equals(nienKhoa_maMon[1])) {
@@ -256,31 +284,33 @@ public class dStudent {
 								+ "," + arrLine[5] + "," + arrLine[6];
 					}
 				}
-
-				// day vao mang
 				listStudent.add(line);
-
-				bw = new BufferedWriter(new FileWriter("data/listStudent.txt"));
-				int i = 0;
-				for (String student : listStudent) {
-					if (i == 0) {
-						bw.append(student);
-					} else {
-						bw.append("\n" + student);
-					}
-					i++;
-				}
 			}
+			// write file
+			bw = new BufferedWriter(new FileWriter("data/listStudent.txt"));
+			int i = 0;
+			for (String student : listStudent) {
+				if (i == 0) {
+					bw.append(student);
+				} else {
+					bw.append("\n" + student);
+				}
+				i++;
+			}
+			flag = true;
 			bw.flush();
 			bw.close();
-			flag = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		br.close();
 		return flag;
 	}
-
+	
+	/**
+	 * Function: countLineFile (path file)
+	 * return total line of file
+	 */
 	public static int countLineFile(String path) throws IOException {
 		int count = 0;
 		BufferedReader br = null;

@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import models.mTkb;
 
 public class dTkb {
+	/**
+	 * Function: getListTkb 
+	 * return ArrayList<mTkb> listTkb[ line, line1, ... ]
+	 * 		  String line = "stt, nienKhoa, maMon, tenMon, phong"
+	 */
 	public static ArrayList<mTkb> getListTkb() throws IOException {
 		ArrayList<mTkb> listTkb = new ArrayList<mTkb>();
 		BufferedReader br = null;

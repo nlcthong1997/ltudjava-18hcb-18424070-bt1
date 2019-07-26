@@ -133,7 +133,7 @@ public class vDanhSachLop {
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(frame, "Ban chua chon dong de sua.", "Thong bao",
+					JOptionPane.showMessageDialog(frame, "Ban chua chon dong de xoa.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}

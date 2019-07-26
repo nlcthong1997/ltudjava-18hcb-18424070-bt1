@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import handleData.dDiem;
 import models.mDiem;
+import models.result;
 
 public class cDiem {
 	public static ArrayList<mDiem> getListDiemWithSubjects(String cLass) throws IOException {
@@ -44,24 +45,35 @@ public class cDiem {
 		String nienKhoa_maMon[] = cLass.split("\\-");
 		int listTotal = 0;
 		int dauTotal = 0;
+		String dauPercent = "0";
+		String rotPercent = "0";
 		for (mDiem diem : dDiem.getListDiem()) {
 			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1])) {
 				if (Integer.parseInt(diem.getDiemTong()) >= 5) {
 					dauTotal++;
 				}
 				listTotal++;
-				System.out.println(nienKhoa_maMon[0]);
-				System.out.println(nienKhoa_maMon[1]);
-				System.out.println(Integer.parseInt(diem.getDiemTong()));
 			}
 		}
-//		System.out.println(nienKhoa_maMon[0]);
-//		System.out.println(nienKhoa_maMon[1]);
-//		System.out.println(listTotal);
-		System.out.println(dauTotal);
-		String dauPercent = Integer.toString((100 * dauTotal) / listTotal);
-		String rotPercent = Integer.toString(100 - ((100 * dauTotal) / listTotal));
-		String listDiemPercent[] = new String[] {dauPercent, rotPercent};
+		if (listTotal != 0) {
+			dauPercent = Integer.toString((100 * dauTotal) / listTotal);
+			rotPercent = Integer.toString(100 - ((100 * dauTotal) / listTotal));
+		}
+		String listDiemPercent[] = {dauPercent, rotPercent};
 		return listDiemPercent;
+	}
+	
+	/*
+	 * Function: Edit Diem for one student
+	 * Format of request: inforEdited[] = { nienKhoa-maMon, mssv, diemGK, diemCK, diemKhac, diemTong } 
+	 */
+	public static result chinhSuaDiem (String[] infoEdited) throws IOException {
+		result rs = null;
+		if (dDiem.updateDiem(infoEdited)) {
+			rs = new result(true, "Chinh sua diem thanh cong", "", "", "");
+		} else {
+			rs = new result(true, "Chinh sua diem that bai", "", "", "");
+		}
+		return rs;
 	}
 }

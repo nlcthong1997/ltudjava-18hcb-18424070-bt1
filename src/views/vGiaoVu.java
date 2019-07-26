@@ -89,58 +89,75 @@ public class vGiaoVu {
 		JButton btnXemDsLop = new JButton("Xem DS lop");
 		btnXemDsLop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String cbbSelected = (String) comboBox.getSelectedItem();
-				frame.dispose();
-				try {
-					vDanhSachLop window = new vDanhSachLop(id, userName, type, cbbSelected);
-					window.frame.setVisible(true);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (comboBox.getSelectedItem() != null) {
+					String cbbSelected = (String) comboBox.getSelectedItem();
+					try {
+						frame.dispose();
+						vDanhSachLop window = new vDanhSachLop(id, userName, type, cbbSelected);
+						window.frame.setVisible(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Khong co du lieu de hien thi", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
-				;
 			}
 		});
 		
 		JButton btnXemDsLopTheoKhoa = new JButton("Xem DS lop");
 		btnXemDsLopTheoKhoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
-				frame.dispose();
-				try {
-					vDanhSachLopTheoKhoa window = new vDanhSachLopTheoKhoa(id, userName, type, cbbLopSelected);
-					window.frame.setVisible(true);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (comboBoxLop.getSelectedItem() != null) {
+					String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+					try {
+						frame.dispose();
+						vDanhSachLopTheoKhoa window = new vDanhSachLopTheoKhoa(id, userName, type, cbbLopSelected);
+						window.frame.setVisible(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Khong co du lieu de hien thi", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
-				
 			}
 		});
 
 		JButton btnThoikhoaabieu = new JButton("Xem Tkb");
 		btnThoikhoaabieu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
-				frame.dispose();
-				try {
-					vTkbTheoKhoa window = new vTkbTheoKhoa(id, userName, type, cbbLopSelected);
-					window.frame.setVisible(true);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (comboBoxLop.getSelectedItem() != null) {
+					String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+					try {
+						frame.dispose();
+						vTkbTheoKhoa window = new vTkbTheoKhoa(id, userName, type, cbbLopSelected);
+						window.frame.setVisible(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Khong co du lieu de hien thi", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
-				
 			}
 		});
 
 		JButton btnBangDiem = new JButton("Xem bang diem");
 		btnBangDiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String cbbSelected = (String) comboBox.getSelectedItem();
-				frame.dispose();
-				try {
-					vBangDiem window = new vBangDiem(id, userName, type, cbbSelected);
-					window.frame.setVisible(true);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (comboBox.getSelectedItem() != null) {
+					String cbbSelected = (String) comboBox.getSelectedItem();
+					try {
+						frame.dispose();
+						vBangDiem window = new vBangDiem(id, userName, type, cbbSelected);
+						window.frame.setVisible(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Khong co du lieu de hien thi", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
