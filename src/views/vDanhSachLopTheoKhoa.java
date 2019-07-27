@@ -85,14 +85,25 @@ public class vDanhSachLopTheoKhoa {
 				window.frame.setVisible(true);
 			}
 		});
+		
+		JButton btnThem = new JButton("Them");
+		btnThem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				vDanhSachLopTheoKhoa_Them window = new vDanhSachLopTheoKhoa_Them(id, userName, type, cLass);
+				window.frame.setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-					.addGap(18)
-					.addComponent(btnQuayLai)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnThem, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnQuayLai, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -100,7 +111,10 @@ public class vDanhSachLopTheoKhoa {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnQuayLai, Alignment.TRAILING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnThem)
+							.addPreferredGap(ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+							.addComponent(btnQuayLai))
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -122,5 +136,4 @@ public class vDanhSachLopTheoKhoa {
 		scrollPane.setViewportView(table);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-
 }

@@ -55,7 +55,7 @@ public class cDanhSachLop {
 	
 	public static result deleteStudent(String[] infoStudent) throws IOException {
 		result rs = null;
-		if (dStudent.deleteStudent(infoStudent)) {
+		if (dStudent.deleteStudentOfClassSubject(infoStudent)) {
 			rs = new result(true, "Xoa thanh cong.", "", "", "");
 		} else {
 			rs = new result(true, "Xoa that bai.", "", "", "");

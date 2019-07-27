@@ -224,11 +224,11 @@ public class dStudent {
 	}
 
 	/**
-	 * Function: deleteStudent
+	 * Function: deleteStudent (feature update cacMon of student in listStudent)
 	 * Format request: infoStudent[] = {"mssv", "hoTen", "gioiTinh", "cmmd", "nienkhoa_maMon"}
 	 * Format arrLine[] = { stt, nienKhoa, cacMon, mssv, hoTen, gioiTinh, cmnd }
 	 */
-	public static boolean deleteStudent(String[] infoStudent) throws IOException {
+	public static boolean deleteStudentOfClassSubject(String[] infoStudent) throws IOException {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		boolean flag = false;
@@ -304,6 +304,29 @@ public class dStudent {
 			e.printStackTrace();
 		}
 		br.close();
+		return flag;
+	}
+	
+	/**
+	 * Format request: info[] = { hoTen, mssv, cmnd, gioiTinh, nienKhoa };
+	 */
+	public static boolean insertStudentInKhoa (String[] info) throws IOException {
+		BufferedWriter bw = null;
+		boolean flag = false;
+		try { 
+			bw = new BufferedWriter(new FileWriter("data/listStudent.txt", true));
+			int currentLine = countLineFile("data/listStudent.txt");
+			String dataLine = Integer.toString(currentLine + 1) + "," + info[4] + "," + "," + info[1] + "," + info[0] + "," + info[3] + "," + info[2];
+			if (currentLine == 1) {
+				bw.append(dataLine);
+			} else {
+				bw.append("\n" + dataLine);
+			}
+			flag = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		bw.close();
 		return flag;
 	}
 	

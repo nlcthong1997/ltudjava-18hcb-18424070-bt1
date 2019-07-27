@@ -7,7 +7,7 @@ import models.mUser;
 import models.result;
 
 public class cLogin {
-	/*
+	/**
 	 * Return ['status', 'message', 'id_user', 'type_user']
 	 */
 	public static result dangNhap(String taiKhoan, String matKhau) {

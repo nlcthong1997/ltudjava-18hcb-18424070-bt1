@@ -23,14 +23,16 @@ import models.result;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class vDanhSachLop_Them {
 
 	public JFrame frame;
 	private JTextField textHoten;
 	private JTextField textMssv;
-	private JTextField textGioiTinh;
 	private JTextField textCmnd;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,7 @@ public class vDanhSachLop_Them {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(String id, String userName, String type, String cLass) {
-		frame = new JFrame();
+		frame = new JFrame("Them sinh vien cho lop - " + cLass);
 		frame.setBounds(100, 100, 446, 386);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -95,23 +97,37 @@ public class vDanhSachLop_Them {
 		textMssv = new JTextField();
 		textMssv.setColumns(10);
 
-		textGioiTinh = new JTextField();
-		textGioiTinh.setColumns(10);
-
 		textCmnd = new JTextField();
 		textCmnd.setColumns(10);
+		
+		JRadioButton rdbtnNam = new JRadioButton("Nam");
+		buttonGroup.add(rdbtnNam);
+		
+		JRadioButton rdbtnNu = new JRadioButton("Nu");
+		buttonGroup.add(rdbtnNu);
 
 		JButton btnThem = new JButton("Them");
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// format : ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
-				if (textMssv.getText().equals("") || textHoten.getText().equals("") || textGioiTinh.getText().equals("")
-						|| textCmnd.getText().equals("")) {
+				String gioiTinh = "";
+				if (rdbtnNam.isSelected()) {
+					gioiTinh = "Nam";
+				} else if (rdbtnNu.isSelected()) {
+					gioiTinh = "Nu";
+				} else {
+					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				String mssv = textMssv.getText();
+				String hoTen = textHoten.getText();
+				String cmnd = textCmnd.getText();
+				
+				if (mssv.equals("") || hoTen.equals("") || cmnd.equals("")) {
 					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					String[] info = new String[] { textMssv.getText(), textHoten.getText(), textGioiTinh.getText(),
-							textCmnd.getText(), cLass };
+					String[] info = new String[] { mssv, hoTen, gioiTinh, cmnd, cLass };
 					try {
 						result rs = cDanhSachLop.insertStudent(info);
 						if (rs.isStatus()) {
@@ -119,7 +135,6 @@ public class vDanhSachLop_Them {
 									JOptionPane.INFORMATION_MESSAGE);
 							textMssv.setText(null);
 							textHoten.setText(null);
-							textGioiTinh.setText(null);
 							textCmnd.setText(null);
 						}
 					} catch (IOException e) {
@@ -141,40 +156,42 @@ public class vDanhSachLop_Them {
 				}
 			}
 		});
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(138)
 					.addComponent(lblThemSinhVien)
-					.addContainerGap(137, Short.MAX_VALUE))
+					.addContainerGap(136, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnThem))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(36)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblCmnd)
-										.addComponent(lblHoTen)
-										.addComponent(lblMssv))
-									.addGap(25))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblGioiTinh)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textHoten, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-								.addComponent(textGioiTinh, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-								.addComponent(textCmnd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-								.addComponent(textMssv, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))))
-					.addGap(77))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(310, Short.MAX_VALUE)
+					.addContainerGap(345, Short.MAX_VALUE)
 					.addComponent(btnQuayLai)
 					.addContainerGap())
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(36)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblGioiTinh)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnNam)
+							.addGap(18)
+							.addComponent(rdbtnNu)
+							.addGap(120))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnThem)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblHoTen)
+										.addComponent(lblMssv)
+										.addComponent(lblCmnd))
+									.addGap(25)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textHoten, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+										.addComponent(textMssv, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+										.addComponent(textCmnd, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))))
+							.addGap(77))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -191,12 +208,13 @@ public class vDanhSachLop_Them {
 						.addComponent(textHoten, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textGioiTinh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblGioiTinh))
+						.addComponent(textCmnd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblCmnd))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCmnd)
-						.addComponent(textCmnd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblGioiTinh)
+						.addComponent(rdbtnNam)
+						.addComponent(rdbtnNu))
 					.addGap(18)
 					.addComponent(btnThem)
 					.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
