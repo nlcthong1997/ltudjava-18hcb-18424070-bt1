@@ -18,8 +18,8 @@ public class cSinhVien {
 		ArrayList<String> checkSubjectSame = new ArrayList<String>();
 		for (mPoint pointStudent: dPoint.getListDiem()) {
 			for (mSchedule schedule : dTkb.getListTkb()) {
-				if (pointStudent.getIdStudent().equals(userName) && pointStudent.getSubjectCode().equals(schedule.getIdSubject()) && !checkSubjectSame.contains(schedule.getIdSubject())) {
-					checkSubjectSame.add(schedule.getIdSubject());
+				if (pointStudent.getIdStudent().equals(userName) && pointStudent.getSubjectCode().equals(schedule.getSubjectCode()) && !checkSubjectSame.contains(schedule.getSubjectCode())) {
+					checkSubjectSame.add(schedule.getSubjectCode());
 					mPoint point = new mPoint(pointStudent.getId(), pointStudent.getClassName(), schedule.getSubjectName() ,pointStudent.getIdStudent(), pointStudent.getNameStudent(), pointStudent.getMidtermPoint(), 
 							pointStudent.getEndPoint(), pointStudent.getOrtherPoint(), pointStudent.getTotalPoint());
 					listPoints.add(point);
@@ -30,16 +30,16 @@ public class cSinhVien {
 	}
 	
 	public static ArrayList<String> getListSubjectOfStudent (String idStudent) throws IOException {
-		String[] listIdSubject = new String[] {};
+		String[] listSubjectCode = new String[] {};
 		for (mStudent student: dStudent.getListStudent()) {
 			if (student.getIdStudent().equals(idStudent)) {
-				listIdSubject = student.getSubjects().split("\\|");
+				listSubjectCode = student.getSubjects().split("\\|");
 			}
 		}
 		ArrayList<String> listSubject = new ArrayList<String>();
 		for (mSchedule schedule : dTkb.getListTkb()) {
-			for (String idSubject : listIdSubject) {
-				if (idSubject.equals(schedule.getIdSubject()) && !listSubject.contains(schedule.getSubjectName())) {
+			for (String subjectCode : listSubjectCode) {
+				if (subjectCode.equals(schedule.getSubjectCode()) && !listSubject.contains(schedule.getSubjectName())) {
 					listSubject.add(schedule.getSubjectName());
 				}
 			}

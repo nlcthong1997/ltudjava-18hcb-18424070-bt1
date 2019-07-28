@@ -7,7 +7,9 @@ import handleData.dTkb;
 import models.mSchedule;
 
 public class cTkbTheoKhoa {
-	public static ArrayList<mSchedule> getListTkbKhoa (String cLass) throws IOException {
+	
+	//getListTkbKhoa
+	public static ArrayList<mSchedule> getListScheduleFollowClassName (String cLass) throws IOException {
 		ArrayList<mSchedule> listTkb = new ArrayList<mSchedule>();
 		for (mSchedule schedule : dTkb.getListTkb()) {
 			if (schedule.getClassName().equals(cLass)) {

@@ -105,15 +105,15 @@ public class vTkbTheoKhoa {
 		);
 		
 		// handles table list student
-		ArrayList<mSchedule> listTkb = cTkbTheoKhoa.getListTkbKhoa(cLass);
+		ArrayList<mSchedule> listSchedules = cTkbTheoKhoa.getListScheduleFollowClassName(cLass);
 		String[] titles = new String[] { "STT", "Ma mon", "Ten mon", "Phong hoc" };
-		String[][] data = new String[listTkb.size()][4];
+		String[][] data = new String[listSchedules.size()][4];
 		int i = 0;
-		for (mSchedule tkb : listTkb) {
-			data[i][0] = tkb.getId();
-			data[i][1] = tkb.getIdSubject();
-			data[i][2] = tkb.getSubjectName();
-			data[i][3] = tkb.getClassRoom();
+		for (mSchedule schedule : listSchedules) {
+			data[i][0] = schedule.getId();
+			data[i][1] = schedule.getSubjectCode();
+			data[i][2] = schedule.getSubjectName();
+			data[i][3] = schedule.getClassRoom();
 			i++;
 		}
 		table = new JTable(data, titles);

@@ -3,15 +3,15 @@ package models;
 public class mSchedule {
 	private String id;
 	private String className;
-	private String idSubject;
+	private String subjectCode;
 	private String subjectName;
 	private String classRoom;
 
-	public mSchedule(String id, String className, String idSubject, String subjectName, String classRoom) {
+	public mSchedule(String id, String className, String subjectCode, String subjectName, String classRoom) {
 		super();
 		this.id = id;
 		this.className = className;
-		this.idSubject = idSubject;
+		this.subjectCode = subjectCode;
 		this.subjectName = subjectName;
 		this.classRoom = classRoom;
 	}
@@ -32,12 +32,12 @@ public class mSchedule {
 		this.className = className;
 	}
 
-	public String getIdSubject() {
-		return idSubject;
+	public String getSubjectCode() {
+		return subjectCode;
 	}
 
-	public void setIdSubject(String idSubject) {
-		this.idSubject = idSubject;
+	public void setSubjectCode(String subjectCode) {
+		this.subjectCode = subjectCode;
 	}
 
 	public String getSubjectName() {

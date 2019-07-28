@@ -68,7 +68,7 @@ public class cGiaoVu {
 					String subjects = "";
 					for (mSchedule schedule : listSchedules) {
 						if (student.getClassName().equals(schedule.getClassName())) {
-							subjects += schedule.getIdSubject() + "|";
+							subjects += schedule.getSubjectCode() + "|";
 						}
 					}
 					if (subjects != "") {
@@ -99,7 +99,7 @@ public class cGiaoVu {
 		for (mStudent student : dStudent.getListStudent()) {
 			for (mSchedule schedule : dTkb.getListTkb()) {
 				if (student.getClassName().equals(schedule.getClassName())) {
-					String classSchedule = student.getClassName() + "-" + schedule.getIdSubject();
+					String classSchedule = student.getClassName() + "-" + schedule.getSubjectCode();
 					if (!listClass.contains(classSchedule)) {
 						listClass.add(classSchedule);
 					}

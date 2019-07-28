@@ -89,7 +89,7 @@ public class dGiaoVu {
 			int currentLine = countLineFile(path);
 			for (mSchedule schedule : listSchedules) {
 				currentLine++;
-				String dataLine = Integer.toString(currentLine) + "," + schedule.getClassName() + "," + schedule.getIdSubject() + ","
+				String dataLine = Integer.toString(currentLine) + "," + schedule.getClassName() + "," + schedule.getSubjectCode() + ","
 						+ schedule.getSubjectName() + "," + schedule.getClassRoom();
 				if (currentLine == 1) {
 					bw.append(dataLine);
