@@ -86,11 +86,19 @@ public class vLogin {
 					// function dangNhap
 					if (rs.isStatus()) {
 						if (rs.getTypeUser().equals("gv")) {
+							//giao vu
 							frame.dispose();
 							vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 							window.frame.setVisible(true);
 						} else {
-							// sinh vien
+							//sinh vien
+							frame.dispose();
+							try {
+								vSinhVien window = new vSinhVien(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+								window.frame.setVisible(true);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
 						}
 					} else {
 						JOptionPane.showMessageDialog(frame, rs.getMessage());
@@ -113,6 +121,13 @@ public class vLogin {
 						window.frame.setVisible(true);
 					} else {
 						// sinh vien
+						frame.dispose();
+						try {
+							vSinhVien window = new vSinhVien(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+							window.frame.setVisible(true);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 				} else {
 					JOptionPane.showMessageDialog(frame, rs.getMessage());

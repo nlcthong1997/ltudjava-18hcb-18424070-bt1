@@ -115,8 +115,18 @@ public class vDoiMatKhau {
 		btnQuayLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				vGiaoVu window = new vGiaoVu(id, userName, type);
-				window.frame.setVisible(true);
+				if (type.equals("gv")) {
+					vGiaoVu window = new vGiaoVu(id, userName, type);
+					window.frame.setVisible(true);
+				} else {
+					try {
+						vSinhVien window = new vSinhVien(id, userName, type);
+						window.frame.setVisible(true);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
