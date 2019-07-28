@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import models.mDiem;
+import models.mPoint;
 import models.mStudent;
-import models.mTkb;
+import models.mSchedule;
 
 public class dStudent {
 	/**
@@ -53,9 +53,9 @@ public class dStudent {
 			bw = new BufferedWriter(new FileWriter(path));
 			int currentLine = countLineFile(path);
 			for (mStudent student : listStudent) {
-				String dataLine = student.getStt() + "," + student.getNienKhoa() + "," + student.getCacMon() + ","
-						+ student.getMssv() + "," + student.getHoTen() + "," + student.getGioiTinh() + ","
-						+ student.getCmnd();
+				String dataLine = student.getId() + "," + student.getClassName() + "," + student.getSubjects() + ","
+						+ student.getIdStudent() + "," + student.getNameStudent() + "," + student.getSex() + ","
+						+ student.getIdentityCard();
 				if (currentLine == 0) {
 					bw.append(dataLine);
 				} else {

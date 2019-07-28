@@ -9,7 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import controllers.cDiem;
-import models.mDiem;
+import models.mPoint;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -69,18 +69,18 @@ public class vBangDiemRot {
 					.addGap(6))
 		);
 		
-		ArrayList<mDiem> listDiemRot = cDiem.getListDiemRot(cLass);
+		ArrayList<mPoint> listFallPoint = cDiem.getListFallPoint(cLass);
 		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Diem GK", "Diem CK", "Diem Khac", "Diem Tong" };
-		String[][] data = new String[listDiemRot.size()][7];
+		String[][] data = new String[listFallPoint.size()][7];
 		int i = 0;
-		for (mDiem diem : listDiemRot) {
-			data[i][0] = diem.getStt();
-			data[i][1] = diem.getMssv();
-			data[i][2] = diem.getHoTen();
-			data[i][3] = diem.getDiemGk();
-			data[i][4] = diem.getDiemCk();
-			data[i][5] = diem.getDiemKhac();
-			data[i][6] = diem.getDiemTong();
+		for (mPoint point : listFallPoint) {
+			data[i][0] = point.getId();
+			data[i][1] = point.getIdStudent();
+			data[i][2] = point.getNameStudent();
+			data[i][3] = point.getMidtermPoint();
+			data[i][4] = point.getEndPoint();
+			data[i][5] = point.getOrtherPoint();
+			data[i][6] = point.getTotalPoint();
 			i++;
 		}
 		table = new JTable(data, titles);

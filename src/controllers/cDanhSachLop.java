@@ -9,22 +9,24 @@ import models.mStudent;
 import models.result;
 
 public class cDanhSachLop {
-	public static ArrayList<mStudent> getListStudentWithClass(String cLass) throws IOException {
+	
+	//getListStudentWithClass
+	public static ArrayList<mStudent> getListStudentFollowSubject(String cLass) throws IOException {
 		ArrayList<mStudent> listStudentClass = new ArrayList<mStudent>();
 
 		// format : arrayClass[0] = nien_khoa, arrayClass[1] = ma_mon
 		String arrayClass[] = cLass.split("\\-");
 
 		for (mStudent student : dStudent.getListStudent()) {
-			String arrayCacMon[] = student.getCacMon().split("\\|");
+			String arraySubjects[] = student.getSubjects().split("\\|");
 
 			// check ma_mon co thuoc cac mon ma sinh vien dang hoc ko
-			boolean check = Arrays.stream(arrayCacMon).anyMatch(arrayClass[1]::equals);
+			boolean checkExistsIdSubject = Arrays.stream(arraySubjects).anyMatch(arrayClass[1]::equals);
 			
 			// check sv cua khoa khac
-			boolean checkOther = Arrays.stream(arrayCacMon).anyMatch(cLass::equals);
+			boolean checkStudentOtherClassName = Arrays.stream(arraySubjects).anyMatch(cLass::equals);
 
-			if ((student.getNienKhoa().equals(arrayClass[0]) && check) || checkOther) {
+			if ((student.getClassName().equals(arrayClass[0]) && checkExistsIdSubject) || checkStudentOtherClassName) {
 				listStudentClass.add(student);
 			}
 		}
@@ -33,7 +35,9 @@ public class cDanhSachLop {
 
 	// DanhSachLop_Them
 	// data ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_lop"]
-	public static result insertStudent(String[] infoStudent) throws IOException {
+	
+	//insertStudent
+	public static result insertStudentOfClassSubject(String[] infoStudent) throws IOException {
 		result rs = null;
 		String khoa = infoStudent[0].substring(0, 2);
 		String lop = infoStudent[4].substring(0, 2);
@@ -52,8 +56,8 @@ public class cDanhSachLop {
 		}
 		return rs;
 	}
-	
-	public static result deleteStudent(String[] infoStudent) throws IOException {
+	//deleteStudent
+	public static result deleteStudentOfClassSubject(String[] infoStudent) throws IOException {
 		result rs = null;
 		if (dStudent.deleteStudentOfClassSubject(infoStudent)) {
 			rs = new result(true, "Xoa thanh cong.", "", "", "");

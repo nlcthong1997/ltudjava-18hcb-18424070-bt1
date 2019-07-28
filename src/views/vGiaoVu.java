@@ -76,21 +76,21 @@ public class vGiaoVu {
 		});
 		
 		JLabel lblLop = new JLabel("Lop theo mon");
-		JComboBox<String> comboBox = new JComboBox<String>();
+		JComboBox<String> comboBoxClassSubject = new JComboBox<String>();
 		
 		//lop theo khoa
 		JLabel lblLop_1 = new JLabel("Lop");
-		JComboBox<String> comboBoxLop = new JComboBox<String>();
+		JComboBox<String> comboBoxClassName = new JComboBox<String>();
 		
 		// handle auto load data
-		loadCombobox(comboBox);
-		loadComboboxLop(comboBoxLop);
+		loadComboboxFollowSubject(comboBoxClassSubject);
+		loadComboboxFollowClassName(comboBoxClassName);
 
 		JButton btnXemDsLop = new JButton("Xem DS lop");
 		btnXemDsLop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (comboBox.getSelectedItem() != null) {
-					String cbbSelected = (String) comboBox.getSelectedItem();
+				if (comboBoxClassSubject.getSelectedItem() != null) {
+					String cbbSelected = (String) comboBoxClassSubject.getSelectedItem();
 					try {
 						frame.dispose();
 						vDanhSachLop window = new vDanhSachLop(id, userName, type, cbbSelected);
@@ -108,8 +108,8 @@ public class vGiaoVu {
 		JButton btnXemDsLopTheoKhoa = new JButton("Xem DS lop");
 		btnXemDsLopTheoKhoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (comboBoxLop.getSelectedItem() != null) {
-					String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+				if (comboBoxClassName.getSelectedItem() != null) {
+					String cbbLopSelected = (String) comboBoxClassName.getSelectedItem();
 					try {
 						frame.dispose();
 						vDanhSachLopTheoKhoa window = new vDanhSachLopTheoKhoa(id, userName, type, cbbLopSelected);
@@ -127,8 +127,8 @@ public class vGiaoVu {
 		JButton btnThoikhoaabieu = new JButton("Xem Tkb");
 		btnThoikhoaabieu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (comboBoxLop.getSelectedItem() != null) {
-					String cbbLopSelected = (String) comboBoxLop.getSelectedItem();
+				if (comboBoxClassName.getSelectedItem() != null) {
+					String cbbLopSelected = (String) comboBoxClassName.getSelectedItem();
 					try {
 						frame.dispose();
 						vTkbTheoKhoa window = new vTkbTheoKhoa(id, userName, type, cbbLopSelected);
@@ -146,8 +146,8 @@ public class vGiaoVu {
 		JButton btnBangDiem = new JButton("Xem bang diem");
 		btnBangDiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (comboBox.getSelectedItem() != null) {
-					String cbbSelected = (String) comboBox.getSelectedItem();
+				if (comboBoxClassSubject.getSelectedItem() != null) {
+					String cbbSelected = (String) comboBoxClassSubject.getSelectedItem();
 					try {
 						frame.dispose();
 						vBangDiem window = new vBangDiem(id, userName, type, cbbSelected);
@@ -215,8 +215,8 @@ public class vGiaoVu {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 					// handle auto load data
-					loadCombobox(comboBox);
-					loadComboboxLop(comboBoxLop);
+					loadComboboxFollowSubject(comboBoxClassSubject);
+					loadComboboxFollowClassName(comboBoxClassName);
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -237,7 +237,7 @@ public class vGiaoVu {
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 					// handle auto load data
-					loadCombobox(comboBox);
+					loadComboboxFollowSubject(comboBoxClassSubject);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -255,8 +255,8 @@ public class vGiaoVu {
 							.addComponent(lblLop, Alignment.LEADING)
 							.addGroup(groupLayout.createSequentialGroup()
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(comboBox, 0, 256, Short.MAX_VALUE)
-									.addComponent(comboBoxLop, 0, 256, Short.MAX_VALUE)
+									.addComponent(comboBoxClassSubject, 0, 256, Short.MAX_VALUE)
+									.addComponent(comboBoxClassName, 0, 256, Short.MAX_VALUE)
 									.addComponent(lblLop_1)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 										.addComponent(btnDangxuat, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -281,7 +281,7 @@ public class vGiaoVu {
 					.addComponent(lblLop)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxClassSubject, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnXemDsLop))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnBangDiem)
@@ -289,7 +289,7 @@ public class vGiaoVu {
 					.addComponent(lblLop_1)
 					.addGap(7)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBoxLop, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxClassName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnXemDsLopTheoKhoa))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnThoikhoaabieu)
@@ -314,24 +314,24 @@ public class vGiaoVu {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
-	private void loadCombobox(JComboBox<String> comboBox) {
+	private void loadComboboxFollowSubject(JComboBox<String> comboBoxClassSubject) {
 		// handles set value for combobox
 		try {
-			comboBox.removeAllItems();
-			for (String cLass : cGiaoVu.getListClassWithSubjects()) {
-				comboBox.addItem(cLass);
+			comboBoxClassSubject.removeAllItems();
+			for (String cLass : cGiaoVu.getListClassFollowSubjects()) {
+				comboBoxClassSubject.addItem(cLass);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void loadComboboxLop(JComboBox<String> comboBoxLop) {
+	private void loadComboboxFollowClassName(JComboBox<String> comboBoxClassName) {
 		// handles set value for combobox
 		try {
-			comboBoxLop.removeAllItems();
-			for (String cLass : cGiaoVu.getListClass()) {
-				comboBoxLop.addItem(cLass);
+			comboBoxClassName.removeAllItems();
+			for (String cLass : cGiaoVu.getListClassName()) {
+				comboBoxClassName.addItem(cLass);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

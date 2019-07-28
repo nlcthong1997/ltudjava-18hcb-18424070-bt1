@@ -3,73 +3,78 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import handleData.dDiem;
-import models.mDiem;
+import handleData.dPoint;
+import models.mPoint;
 import models.result;
 
 public class cDiem {
-	public static ArrayList<mDiem> getListDiemWithSubjects(String cLass) throws IOException {
-		ArrayList<mDiem> listDiem = new ArrayList<mDiem>();
-		String nienKhoa_maMon[] = cLass.split("\\-");
-		for (mDiem diem : dDiem.getListDiem()) {
-			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1])) {
-				listDiem.add(diem);
+	//getListDiemWithSubjects
+	public static ArrayList<mPoint> getListPointWithSubjects(String cLass) throws IOException {
+		ArrayList<mPoint> listPoints = new ArrayList<mPoint>();
+		String className_subjectCode[] = cLass.split("\\-");
+		for (mPoint point : dPoint.getListDiem()) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1])) {
+				listPoints.add(point);
 			}
 		}
-		return listDiem;
+		return listPoints;
 	}
 	
-	public static ArrayList<mDiem> getListDiemDau(String cLass) throws IOException {
-		ArrayList<mDiem> listDiem = new ArrayList<mDiem>();
-		String nienKhoa_maMon[] = cLass.split("\\-");
-		for (mDiem diem : dDiem.getListDiem()) {
-			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1]) && (Integer.parseInt(diem.getDiemTong()) >= 5)) {
-				listDiem.add(diem);
+	//getListDiemDau
+	public static ArrayList<mPoint> getListPassPoint(String cLass) throws IOException {
+		ArrayList<mPoint> listPoints = new ArrayList<mPoint>();
+		String className_subjectCode[] = cLass.split("\\-");
+		for (mPoint point : dPoint.getListDiem()) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Integer.parseInt(point.getTotalPoint()) >= 5)) {
+				listPoints.add(point);
 			}
 		}
-		return listDiem;
+		return listPoints;
 	}
 	
-	public static ArrayList<mDiem> getListDiemRot(String cLass) throws IOException {
-		ArrayList<mDiem> listDiem = new ArrayList<mDiem>();
-		String nienKhoa_maMon[] = cLass.split("\\-");
-		for (mDiem diem : dDiem.getListDiem()) {
-			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1]) && (Integer.parseInt(diem.getDiemTong()) < 5)) {
-				listDiem.add(diem);
+	//getListDiemRot
+	public static ArrayList<mPoint> getListFallPoint(String cLass) throws IOException {
+		ArrayList<mPoint> listPoints = new ArrayList<mPoint>();
+		String className_subjectCode[] = cLass.split("\\-");
+		for (mPoint point : dPoint.getListDiem()) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Integer.parseInt(point.getTotalPoint()) < 5)) {
+				listPoints.add(point);
 			}
 		}
-		return listDiem;
+		return listPoints;
 	}
 	
-	public static String[] getDiemPercent (String cLass) throws IOException {
-		String nienKhoa_maMon[] = cLass.split("\\-");
+	//getDiemPercent
+	public static String[] getPointPercent (String cLass) throws IOException {
+		String className_subjectCode[] = cLass.split("\\-");
 		int listTotal = 0;
-		int dauTotal = 0;
-		String dauPercent = "0";
-		String rotPercent = "0";
-		for (mDiem diem : dDiem.getListDiem()) {
-			if (diem.getNienKhoa().equals(nienKhoa_maMon[0]) && diem.getMaMon().equals(nienKhoa_maMon[1])) {
-				if (Integer.parseInt(diem.getDiemTong()) >= 5) {
-					dauTotal++;
+		int passTotal = 0;
+		String passPercent = "0";
+		String fallPercent = "0";
+		for (mPoint point : dPoint.getListDiem()) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1])) {
+				if (Integer.parseInt(point.getTotalPoint()) >= 5) {
+					passTotal++;
 				}
 				listTotal++;
 			}
 		}
 		if (listTotal != 0) {
-			dauPercent = Integer.toString((100 * dauTotal) / listTotal);
-			rotPercent = Integer.toString(100 - ((100 * dauTotal) / listTotal));
+			passPercent = Integer.toString((100 * passTotal) / listTotal);
+			fallPercent = Integer.toString(100 - ((100 * passTotal) / listTotal));
 		}
-		String listDiemPercent[] = {dauPercent, rotPercent};
-		return listDiemPercent;
+		String listPointPercent[] = {passPercent, fallPercent};
+		return listPointPercent;
 	}
 	
 	/*
 	 * Function: Edit Diem for one student
 	 * Format of request: inforEdited[] = { nienKhoa-maMon, mssv, diemGK, diemCK, diemKhac, diemTong } 
 	 */
-	public static result chinhSuaDiem (String[] infoEdited) throws IOException {
+	//chinhSuaDiem
+	public static result editPointStudent (String[] infoEdited) throws IOException {
 		result rs = null;
-		if (dDiem.updateDiem(infoEdited)) {
+		if (dPoint.updateDiem(infoEdited)) {
 			rs = new result(true, "Chinh sua diem thanh cong", "", "", "");
 		} else {
 			rs = new result(true, "Chinh sua diem that bai", "", "", "");

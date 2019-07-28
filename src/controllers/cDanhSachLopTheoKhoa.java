@@ -8,10 +8,11 @@ import models.mStudent;
 import models.result;
 
 public class cDanhSachLopTheoKhoa {
-	public static ArrayList<mStudent> getListStudentWithClass(String cLass) throws IOException {
+	//getListStudentWithClass
+	public static ArrayList<mStudent> getListStudentFollowClassName(String cLass) throws IOException {
 		ArrayList<mStudent> listClass = new ArrayList<mStudent>();
 		for (mStudent student: dStudent.getListStudent()) {
-			if (student.getNienKhoa().equals(cLass)) {
+			if (student.getClassName().equals(cLass)) {
 				listClass.add(student);
 			}
 		}

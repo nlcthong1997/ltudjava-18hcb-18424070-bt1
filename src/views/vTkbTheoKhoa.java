@@ -16,7 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controllers.cDanhSachLopTheoKhoa;
 import controllers.cTkbTheoKhoa;
-import models.mTkb;
+import models.mSchedule;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -105,15 +105,15 @@ public class vTkbTheoKhoa {
 		);
 		
 		// handles table list student
-		ArrayList<mTkb> listTkb = cTkbTheoKhoa.getListTkbKhoa(cLass);
+		ArrayList<mSchedule> listTkb = cTkbTheoKhoa.getListTkbKhoa(cLass);
 		String[] titles = new String[] { "STT", "Ma mon", "Ten mon", "Phong hoc" };
 		String[][] data = new String[listTkb.size()][4];
 		int i = 0;
-		for (mTkb tkb : listTkb) {
-			data[i][0] = tkb.getStt();
-			data[i][1] = tkb.getMaMon();
-			data[i][2] = tkb.getTenMon();
-			data[i][3] = tkb.getPhongHoc();
+		for (mSchedule tkb : listTkb) {
+			data[i][0] = tkb.getId();
+			data[i][1] = tkb.getIdSubject();
+			data[i][2] = tkb.getSubjectName();
+			data[i][3] = tkb.getClassRoom();
 			i++;
 		}
 		table = new JTable(data, titles);

@@ -118,7 +118,7 @@ public class vBangDiem_Sua {
 				String infoEdited[] = { info[7], info[1], diemGK, diemCK, diemKhac, diemTong };
 				if (!diemGK.equals("") && !diemCK.equals("") && !diemKhac.equals("") && !diemTong.equals("")) {
 					try {
-						result rs = cDiem.chinhSuaDiem(infoEdited);
+						result rs = cDiem.editPointStudent(infoEdited);
 						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 								JOptionPane.INFORMATION_MESSAGE);
 					} catch (IOException e) {

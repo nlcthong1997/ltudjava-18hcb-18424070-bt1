@@ -13,7 +13,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controllers.cDanhSachLop;
 import controllers.cDiem;
-import models.mDiem;
+import models.mPoint;
 import models.mStudent;
 import models.result;
 
@@ -131,7 +131,7 @@ public class vBangDiem {
 				
 			}
 		});
-		String diemPerCent[] = cDiem.getDiemPercent(cLass);
+		String diemPerCent[] = cDiem.getPointPercent(cLass);
 		JLabel lblTileDau = new JLabel("Ti le dau: " + diemPerCent[0] + "%");
 		lblTileDau.setHorizontalAlignment(SwingConstants.LEFT);
 		
@@ -195,18 +195,18 @@ public class vBangDiem {
 		);
 		
 		// handles table
-		ArrayList<mDiem> listDiemClass = cDiem.getListDiemWithSubjects(cLass);
+		ArrayList<mPoint> listPointClass = cDiem.getListPointWithSubjects(cLass);
 		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Diem GK", "Diem CK", "Diem Khac", "Diem Tong" };
-		String[][] data = new String[listDiemClass.size()][7];
+		String[][] data = new String[listPointClass.size()][7];
 		int i = 0;
-		for (mDiem diem : listDiemClass) {
-			data[i][0] = diem.getStt();
-			data[i][1] = diem.getMssv();
-			data[i][2] = diem.getHoTen();
-			data[i][3] = diem.getDiemGk();
-			data[i][4] = diem.getDiemCk();
-			data[i][5] = diem.getDiemKhac();
-			data[i][6] = diem.getDiemTong();
+		for (mPoint point : listPointClass) {
+			data[i][0] = point.getId();
+			data[i][1] = point.getIdStudent();
+			data[i][2] = point.getNameStudent();
+			data[i][3] = point.getMidtermPoint();
+			data[i][4] = point.getEndPoint();
+			data[i][5] = point.getOrtherPoint();
+			data[i][6] = point.getTotalPoint();
 			i++;
 		}
 		table = new JTable(data, titles);

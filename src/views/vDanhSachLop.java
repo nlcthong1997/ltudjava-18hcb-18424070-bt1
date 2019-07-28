@@ -84,16 +84,16 @@ public class vDanhSachLop {
 		});
 
 		// handles table list student
-		ArrayList<mStudent> listStudentClass = cDanhSachLop.getListStudentWithClass(cLass);
+		ArrayList<mStudent> listStudentClassSubject = cDanhSachLop.getListStudentFollowSubject(cLass);
 		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Gioi Tinh", "CMND" };
-		String[][] data = new String[listStudentClass.size()][5];
+		String[][] data = new String[listStudentClassSubject.size()][5];
 		int i = 0;
-		for (mStudent student : listStudentClass) {
-			data[i][0] = student.getStt();
-			data[i][1] = student.getMssv();
-			data[i][2] = student.getHoTen();
-			data[i][3] = student.getGioiTinh();
-			data[i][4] = student.getCmnd();
+		for (mStudent student : listStudentClassSubject) {
+			data[i][0] = student.getId();
+			data[i][1] = student.getIdStudent();
+			data[i][2] = student.getNameStudent();
+			data[i][3] = student.getSex();
+			data[i][4] = student.getIdentityCard();
 			i++;
 		}
 		table = new JTable(data, titles);
@@ -120,7 +120,7 @@ public class vDanhSachLop {
 					String cmnd = table.getModel().getValueAt(row, 4).toString();
 					String info[] = { mssv, hoTen, gioiTinh, cmnd, cLass };
 					try {
-						result rs = cDanhSachLop.deleteStudent(info);
+						result rs = cDanhSachLop.deleteStudentOfClassSubject(info);
 						if (rs.isStatus()) {
 							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 									JOptionPane.INFORMATION_MESSAGE);

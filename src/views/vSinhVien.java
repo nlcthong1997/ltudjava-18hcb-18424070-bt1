@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controllers.cGiaoVu;
 import controllers.cSinhVien;
-import models.mDiem;
+import models.mPoint;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -54,16 +54,16 @@ public class vSinhVien {
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
-	public vSinhVien(String id, String userName, String type) throws IOException {
-		initialize(id, userName, type);
+	public vSinhVien(String id, String idStudent, String type) throws IOException {
+		initialize(id, idStudent, type);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize(String id, String userName, String type) throws IOException {
-		frame = new JFrame("Sinh vien - " + userName);
+	private void initialize(String id, String idStudent, String type) throws IOException {
+		frame = new JFrame("Sinh vien - " + idStudent);
 		frame.setBounds(100, 100, 606, 385);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -87,15 +87,16 @@ public class vSinhVien {
 		JLabel lblMon = new JLabel("Mon");
 
 		JComboBox comboBoxMon = new JComboBox();
-		loadCombobox(comboBoxMon, userName);
+		loadComboboxSubjectOfStudent(comboBoxMon, idStudent);
+		
 		String cbbSelected = (String) comboBoxMon.getSelectedItem();
-		renderDataTable(table, userName, cbbSelected);
+		renderDataTable(table, idStudent, cbbSelected);
 		
 		comboBoxMon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					String cbbSelected = (String) comboBoxMon.getSelectedItem();
-					renderDataTable(table, userName, cbbSelected);
+					renderDataTable(table, idStudent, cbbSelected);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -107,7 +108,7 @@ public class vSinhVien {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (chckbxTaCaMon.isSelected()) {
-						renderDataTable(table, userName, "");
+						renderDataTable(table, idStudent, "");
 					} else {
 						renderDataTable(table, "", "");
 					}
@@ -121,7 +122,7 @@ public class vSinhVien {
 		btnDoiMatKhau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
-				vDoiMatKhau window = new vDoiMatKhau(id, userName, type);
+				vDoiMatKhau window = new vDoiMatKhau(id, idStudent, type);
 				window.frame.setVisible(true);
 			}
 		});
@@ -175,7 +176,7 @@ public class vSinhVien {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
-	private void renderDataTable (JTable table, String userName, String mon) throws IOException {
+	private void renderDataTable (JTable table, String idStudent, String subjectName) throws IOException {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		model.setColumnCount(0);
@@ -188,36 +189,36 @@ public class vSinhVien {
 		model.addColumn("Diem Khac");
 		model.addColumn("Diem Tong");
 
-		if (!mon.equals("")) {
-			for (mDiem diemSV : cSinhVien.getDiemAllSubjectWithStudent(userName)) {
-				Vector<String> listDiem = new Vector<String>();
-				if (diemSV.getMaMon().equals(mon)) {
-					listDiem.add(diemSV.getMaMon());
-					listDiem.add(diemSV.getMssv());
-					listDiem.add(diemSV.getHoTen());
-					listDiem.add(diemSV.getDiemGk());
-					listDiem.add(diemSV.getDiemCk());
-					listDiem.add(diemSV.getDiemKhac());
-					listDiem.add(diemSV.getDiemTong());
-					model.addRow(listDiem);
+		if (!subjectName.equals("")) {
+			for (mPoint pointStudent : cSinhVien.getDiemAllSubjectWithStudent(idStudent)) {
+				Vector<String> listPoints = new Vector<String>();
+				if (pointStudent.getSubjectCode().equals(subjectName)) {
+					listPoints.add(pointStudent.getSubjectCode());
+					listPoints.add(pointStudent.getIdStudent());
+					listPoints.add(pointStudent.getNameStudent());
+					listPoints.add(pointStudent.getMidtermPoint());
+					listPoints.add(pointStudent.getEndPoint());
+					listPoints.add(pointStudent.getOrtherPoint());
+					listPoints.add(pointStudent.getTotalPoint());
+					model.addRow(listPoints);
 				}
 			}
 		} else {
-			for (mDiem diemSV : cSinhVien.getDiemAllSubjectWithStudent(userName)) {
-				Vector<String> listDiem = new Vector<String>();
-				listDiem.add(diemSV.getMaMon());
-				listDiem.add(diemSV.getMssv());
-				listDiem.add(diemSV.getHoTen());
-				listDiem.add(diemSV.getDiemGk());
-				listDiem.add(diemSV.getDiemCk());
-				listDiem.add(diemSV.getDiemKhac());
-				listDiem.add(diemSV.getDiemTong());
-				model.addRow(listDiem);
+			for (mPoint pointStudent : cSinhVien.getDiemAllSubjectWithStudent(idStudent)) {
+				Vector<String> listPoints = new Vector<String>();
+				listPoints.add(pointStudent.getSubjectCode());
+				listPoints.add(pointStudent.getIdStudent());
+				listPoints.add(pointStudent.getNameStudent());
+				listPoints.add(pointStudent.getMidtermPoint());
+				listPoints.add(pointStudent.getEndPoint());
+				listPoints.add(pointStudent.getOrtherPoint());
+				listPoints.add(pointStudent.getTotalPoint());
+				model.addRow(listPoints);
 			}
 		}
 	}
 	
-	private void loadCombobox (JComboBox<String> comboBoxMon, String userName) {
+	private void loadComboboxSubjectOfStudent (JComboBox<String> comboBoxMon, String userName) {
 		//userName is mssv
 		try {
 			comboBoxMon.removeAllItems();

@@ -1,79 +1,80 @@
 package models;
 
 public class mStudent {
-	private String stt;
-	private String nienKhoa;
-	private String cacMon;
-	private String mssv;
-	private String hoTen;
-	private String gioiTinh;
-	private String cmnd;
+	private String id;
+	private String className;
+	private String subjects;
+	private String idStudent;
+	private String nameStudent;
+	private String sex;
+	private String identityCard;
 
-	public mStudent(String stt, String nienKhoa, String cacMon, String mssv, String hoTen, String gioiTinh,
-			String cmnd) {
+	public mStudent(String id, String className, String subjects, String idStudent, String nameStudent, String sex,
+			String identityCard) {
 		super();
-		this.stt = stt;
-		this.nienKhoa = nienKhoa;
-		this.cacMon = cacMon;
-		this.mssv = mssv;
-		this.hoTen = hoTen;
-		this.gioiTinh = gioiTinh;
-		this.cmnd = cmnd;
+		this.id = id;
+		this.className = className;
+		this.subjects = subjects;
+		this.idStudent = idStudent;
+		this.nameStudent = nameStudent;
+		this.sex = sex;
+		this.identityCard = identityCard;
 	}
 
-	public String getStt() {
-		return stt;
+	public String getId() {
+		return id;
 	}
 
-	public void setStt(String stt) {
-		this.stt = stt;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getNienKhoa() {
-		return nienKhoa;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setNienKhoa(String nienKhoa) {
-		this.nienKhoa = nienKhoa;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
-	public String getCacMon() {
-		return cacMon;
+	public String getSubjects() {
+		return subjects;
 	}
 
-	public void setCacMon(String cacMon) {
-		this.cacMon = cacMon;
+	public void setSubjects(String subjects) {
+		this.subjects = subjects;
 	}
 
-	public String getMssv() {
-		return mssv;
+	public String getIdStudent() {
+		return idStudent;
 	}
 
-	public void setMssv(String mssv) {
-		this.mssv = mssv;
+	public void setIdStudent(String idStudent) {
+		this.idStudent = idStudent;
 	}
 
-	public String getHoTen() {
-		return hoTen;
+	public String getNameStudent() {
+		return nameStudent;
 	}
 
-	public void setHoTen(String hoTen) {
-		this.hoTen = hoTen;
+	public void setNameStudent(String nameStudent) {
+		this.nameStudent = nameStudent;
 	}
 
-	public String getGioiTinh() {
-		return gioiTinh;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setGioiTinh(String gioiTinh) {
-		this.gioiTinh = gioiTinh;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
-	public String getCmnd() {
-		return cmnd;
+	public String getIdentityCard() {
+		return identityCard;
 	}
 
-	public void setCmnd(String cmnd) {
-		this.cmnd = cmnd;
+	public void setIdentityCard(String identityCard) {
+		this.identityCard = identityCard;
 	}
+
 }

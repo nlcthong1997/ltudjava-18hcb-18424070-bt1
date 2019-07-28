@@ -7,16 +7,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import models.mDiem;
+import models.mPoint;
 
-public class dDiem {
+public class dPoint {
 	/**
 	 * return ArrayList<mDiem>
 	 * Format: listDiem[] = { line, line1, ... }
 	 * 		   String line = "stt, nienKhoa, maMon, mssv, hoTen, diemGK, diemCK, diemKhac, diemTong"
 	 */
-	public static ArrayList<mDiem> getListDiem () throws IOException {
-		ArrayList<mDiem> listDiem = new ArrayList<mDiem>();
+	public static ArrayList<mPoint> getListDiem () throws IOException {
+		ArrayList<mPoint> listDiem = new ArrayList<mPoint>();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader("data/listBangDiem.txt"));
@@ -24,7 +24,7 @@ public class dDiem {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mDiem student = new mDiem(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
+				mPoint student = new mPoint(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
 						arrayLine[5], arrayLine[6], arrayLine[7], arrayLine[8]);
 				listDiem.add(student);
 			}

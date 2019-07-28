@@ -9,9 +9,9 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-import models.mDiem;
+import models.mPoint;
 import models.mStudent;
-import models.mTkb;
+import models.mSchedule;
 import models.result;
 
 import handleData.dGiaoVu;
@@ -21,7 +21,7 @@ import handleData.dTkb;
 public class cGiaoVu {
 	public static result importCsv(String type) throws IOException {
 		result rs = null;
-
+		// handle file
 		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		if (type.equals("dslop")) {
 			jfc.setDialogTitle("Import danh sach lop");
@@ -40,44 +40,45 @@ public class cGiaoVu {
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = jfc.getSelectedFile();
 			String path = jfc.getSelectedFile().getPath();
+		// end handle file
 			if (type.equals("dslop")) {
-				ArrayList<mStudent> listStudent = dGiaoVu.readStudentCsv(path);
-				if (dGiaoVu.writeStudentFile(listStudent, "data/listStudent.txt")) {
+				ArrayList<mStudent> listStudents = dGiaoVu.readStudentCsv(path);
+				if (dGiaoVu.writeStudentFile(listStudents, "data/listStudent.txt")) {
 					flag = true;
 				}
 			}
 			if (type.equals("tkb")) {
-				ArrayList<mTkb> listTkb = dGiaoVu.readTkbCsv(path);
-				if (dGiaoVu.writeTkbFile(listTkb, "data/listTkb.txt")) {
+				ArrayList<mSchedule> listSchedules = dGiaoVu.readTkbCsv(path);
+				if (dGiaoVu.writeTkbFile(listSchedules, "data/listTkb.txt")) {
 					flag = true;
 				}
 			}
 			if (type.equals("bangdiem")) {
-				ArrayList<mDiem> listTkb = dGiaoVu.readBangDiemCsv(path);
-				if (dGiaoVu.writeBangDiemFile(listTkb, "data/listBangDiem.txt")) {
+				ArrayList<mPoint> listPoints = dGiaoVu.readBangDiemCsv(path);
+				if (dGiaoVu.writeBangDiemFile(listPoints, "data/listBangDiem.txt")) {
 					flag = true;
 				}
 			}
 			// auto mapping relationship
-			ArrayList<mStudent> listS = dStudent.getListStudent();
-			ArrayList<mTkb> listT = dTkb.getListTkb();
-			ArrayList<mStudent> listSNew = new ArrayList<mStudent>();
-			if (listS.size() != 0 && listT.size() != 0) {
-				for (mStudent student : listS) {
-					String cacMon = "";
-					for (mTkb tkb : listT) {
-						if (student.getNienKhoa().equals(tkb.getNienKhoa())) {
-							cacMon += tkb.getMaMon() + "|";
+			ArrayList<mStudent> listStudents = dStudent.getListStudent();
+			ArrayList<mSchedule> listSchedules = dTkb.getListTkb();
+			ArrayList<mStudent> listStudentNew = new ArrayList<mStudent>();
+			if (listStudents.size() != 0 && listSchedules.size() != 0) {
+				for (mStudent student : listStudents) {
+					String subjects = "";
+					for (mSchedule schedule : listSchedules) {
+						if (student.getClassName().equals(schedule.getClassName())) {
+							subjects += schedule.getIdSubject() + "|";
 						}
 					}
-					if (cacMon != "") {
-						cacMon = cacMon.substring(0, cacMon.lastIndexOf("|"));
+					if (subjects != "") {
+						subjects = subjects.substring(0, subjects.lastIndexOf("|"));
 					}
-					mStudent studentNew = new mStudent(student.getStt(), student.getNienKhoa(), cacMon,
-							student.getMssv(), student.getHoTen(), student.getGioiTinh(), student.getCmnd());
-					listSNew.add(studentNew);
+					mStudent studentNew = new mStudent(student.getId(), student.getClassName(), subjects,
+							student.getIdStudent(), student.getNameStudent(), student.getSex(), student.getIdentityCard());
+					listStudentNew.add(studentNew);
 				}
-				if (dStudent.writeListStudentNew(listSNew)) {
+				if (dStudent.writeListStudentNew(listStudentNew)) {
 					flag = true;
 				} else {
 					flag = false;
@@ -92,14 +93,15 @@ public class cGiaoVu {
 		return rs;
 	}
 
-	public static ArrayList<String> getListClassWithSubjects() throws IOException {
+	//getListClassWithSubjects
+	public static ArrayList<String> getListClassFollowSubjects() throws IOException {
 		ArrayList<String> listClass = new ArrayList<String>();
 		for (mStudent student : dStudent.getListStudent()) {
-			for (mTkb tkb : dTkb.getListTkb()) {
-				if (student.getNienKhoa().equals(tkb.getNienKhoa())) {
-					String classTkb = student.getNienKhoa() + "-" + tkb.getMaMon();
-					if (!listClass.contains(classTkb)) {
-						listClass.add(classTkb);
+			for (mSchedule schedule : dTkb.getListTkb()) {
+				if (student.getClassName().equals(schedule.getClassName())) {
+					String classSchedule = student.getClassName() + "-" + schedule.getIdSubject();
+					if (!listClass.contains(classSchedule)) {
+						listClass.add(classSchedule);
 					}
 				}
 			}
@@ -108,11 +110,12 @@ public class cGiaoVu {
 		return listClass;
 	}
 	
-	public static ArrayList<String> getListClass () throws IOException {
+	//getListClass
+	public static ArrayList<String> getListClassName () throws IOException {
 		ArrayList<String> listclass = new ArrayList<String>();
 		for (mStudent student : dStudent.getListStudent()) {
-			if (!listclass.contains(student.getNienKhoa())) {
-				listclass.add(student.getNienKhoa());
+			if (!listclass.contains(student.getClassName())) {
+				listclass.add(student.getClassName());
 			}
 		}
 		Collections.sort(listclass);

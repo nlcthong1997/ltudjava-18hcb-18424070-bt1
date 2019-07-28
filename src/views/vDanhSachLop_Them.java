@@ -129,7 +129,7 @@ public class vDanhSachLop_Them {
 				} else {
 					String[] info = new String[] { mssv, hoTen, gioiTinh, cmnd, cLass };
 					try {
-						result rs = cDanhSachLop.insertStudent(info);
+						result rs = cDanhSachLop.insertStudentOfClassSubject(info);
 						if (rs.isStatus()) {
 							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 									JOptionPane.INFORMATION_MESSAGE);

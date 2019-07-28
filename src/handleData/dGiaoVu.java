@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import models.mDiem;
+import models.mPoint;
 import models.mStudent;
-import models.mTkb;
+import models.mSchedule;
 
 public class dGiaoVu {
 	// Import Student
@@ -42,9 +42,9 @@ public class dGiaoVu {
 			int currentLine = countLineFile(path);
 			for (mStudent student : listStudent) {
 				currentLine++;
-				String dataLine = Integer.toString(currentLine) + "," + student.getNienKhoa() + ","
-						+ student.getCacMon() + "," + student.getMssv() + "," + student.getHoTen() + ","
-						+ student.getGioiTinh() + "," + student.getCmnd();
+				String dataLine = Integer.toString(currentLine) + "," + student.getClassName() + ","
+						+ student.getSubjects() + "," + student.getIdStudent() + "," + student.getNameStudent() + ","
+						+ student.getSex() + "," + student.getIdentityCard();
 				if (currentLine == 1) {
 					bw.append(dataLine);
 				} else {
@@ -61,8 +61,8 @@ public class dGiaoVu {
 	}
 
 	// Import TKB
-	public static ArrayList<mTkb> readTkbCsv(String path) throws IOException {
-		ArrayList<mTkb> listTkb = new ArrayList<mTkb>();
+	public static ArrayList<mSchedule> readTkbCsv(String path) throws IOException {
+		ArrayList<mSchedule> listTkb = new ArrayList<mSchedule>();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(path));
@@ -70,7 +70,7 @@ public class dGiaoVu {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mTkb tkb = new mTkb(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4]);
+				mSchedule tkb = new mSchedule(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4]);
 				listTkb.add(tkb);
 			}
 		} catch (IOException e) {
@@ -81,16 +81,16 @@ public class dGiaoVu {
 		return listTkb;
 	}
 
-	public static boolean writeTkbFile(ArrayList<mTkb> listTkb, String path) throws IOException {
+	public static boolean writeTkbFile(ArrayList<mSchedule> listSchedules, String path) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag;
 		try {
 			bw = new BufferedWriter(new FileWriter(path, true));
 			int currentLine = countLineFile(path);
-			for (mTkb tkb : listTkb) {
+			for (mSchedule schedule : listSchedules) {
 				currentLine++;
-				String dataLine = Integer.toString(currentLine) + "," + tkb.getNienKhoa() + "," + tkb.getMaMon() + ","
-						+ tkb.getTenMon() + "," + tkb.getPhongHoc();
+				String dataLine = Integer.toString(currentLine) + "," + schedule.getClassName() + "," + schedule.getIdSubject() + ","
+						+ schedule.getSubjectName() + "," + schedule.getClassRoom();
 				if (currentLine == 1) {
 					bw.append(dataLine);
 				} else {
@@ -107,8 +107,8 @@ public class dGiaoVu {
 	}
 
 	// Import Diem
-	public static ArrayList<mDiem> readBangDiemCsv(String path) throws IOException {
-		ArrayList<mDiem> listBangDiem = new ArrayList<mDiem>();
+	public static ArrayList<mPoint> readBangDiemCsv(String path) throws IOException {
+		ArrayList<mPoint> listBangDiem = new ArrayList<mPoint>();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(path));
@@ -116,7 +116,7 @@ public class dGiaoVu {
 			String arrayLine[];
 			while ((line = br.readLine()) != null) {
 				arrayLine = line.split("\\,");
-				mDiem diem = new mDiem(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
+				mPoint diem = new mPoint(arrayLine[0], arrayLine[1], arrayLine[2], arrayLine[3], arrayLine[4],
 						arrayLine[5], arrayLine[6], arrayLine[7], arrayLine[8]);
 				listBangDiem.add(diem);
 			}
@@ -128,17 +128,17 @@ public class dGiaoVu {
 		return listBangDiem;
 	}
 
-	public static boolean writeBangDiemFile(ArrayList<mDiem> listBangDiem, String path) throws IOException {
+	public static boolean writeBangDiemFile(ArrayList<mPoint> listPoints, String path) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag;
 		try {
 			bw = new BufferedWriter(new FileWriter(path, true));
 			int currentLine = countLineFile(path);
-			for (mDiem diem : listBangDiem) {
+			for (mPoint point : listPoints) {
 				currentLine++;
-				String dataLine = Integer.toString(currentLine) + "," + diem.getNienKhoa() + "," + diem.getMaMon() + ","
-						+ diem.getMssv() + "," + diem.getHoTen() + "," + diem.getDiemGk() + "," + diem.getDiemCk() + ","
-						+ diem.getDiemKhac() + "," + diem.getDiemTong();
+				String dataLine = Integer.toString(currentLine) + "," + point.getClassName() + "," + point.getSubjectCode() + ","
+						+ point.getIdStudent() + "," + point.getNameStudent() + "," + point.getMidtermPoint() + "," + point.getEndPoint()+ ","
+						+ point.getOrtherPoint() + "," + point.getTotalPoint();
 				if (currentLine == 1) {
 					bw.append(dataLine);
 				} else {

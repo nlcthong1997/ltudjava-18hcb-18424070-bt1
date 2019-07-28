@@ -120,16 +120,16 @@ public class vDanhSachLopTheoKhoa {
 		);
 		
 		// handles table list student
-		ArrayList<mStudent> listStudentClass = cDanhSachLopTheoKhoa.getListStudentWithClass(cLass);
+		ArrayList<mStudent> listStudentClassName = cDanhSachLopTheoKhoa.getListStudentFollowClassName(cLass);
 		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Gioi Tinh", "CMND" };
-		String[][] data = new String[listStudentClass.size()][5];
+		String[][] data = new String[listStudentClassName.size()][5];
 		int i = 0;
-		for (mStudent student : listStudentClass) {
-			data[i][0] = student.getStt();
-			data[i][1] = student.getMssv();
-			data[i][2] = student.getHoTen();
-			data[i][3] = student.getGioiTinh();
-			data[i][4] = student.getCmnd();
+		for (mStudent student : listStudentClassName) {
+			data[i][0] = student.getId();
+			data[i][1] = student.getIdStudent();
+			data[i][2] = student.getNameStudent();
+			data[i][3] = student.getSex();
+			data[i][4] = student.getIdentityCard();
 			i++;
 		}
 		table = new JTable(data, titles);
