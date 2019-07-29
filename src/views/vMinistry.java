@@ -90,10 +90,10 @@ public class vMinistry {
 		btnXemDsLop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBoxClassSubject.getSelectedItem() != null) {
-					String cbbSelected = (String) comboBoxClassSubject.getSelectedItem();
+					String cbbClassSubjectSelected = (String) comboBoxClassSubject.getSelectedItem();
 					try {
 						frame.dispose();
-						vListClass_Subject window = new vListClass_Subject(id, userName, type, cbbSelected);
+						vListClass_Subject window = new vListClass_Subject(id, userName, type, cbbClassSubjectSelected);
 						window.frame.setVisible(true);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -109,10 +109,10 @@ public class vMinistry {
 		btnXemDsLopTheoKhoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBoxClassName.getSelectedItem() != null) {
-					String cbbLopSelected = (String) comboBoxClassName.getSelectedItem();
+					String cbbClassNameSelected = (String) comboBoxClassName.getSelectedItem();
 					try {
 						frame.dispose();
-						vListClass_ClassName window = new vListClass_ClassName(id, userName, type, cbbLopSelected);
+						vListClass_ClassName window = new vListClass_ClassName(id, userName, type, cbbClassNameSelected);
 						window.frame.setVisible(true);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -128,10 +128,10 @@ public class vMinistry {
 		btnThoikhoaabieu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBoxClassName.getSelectedItem() != null) {
-					String cbbLopSelected = (String) comboBoxClassName.getSelectedItem();
+					String cbbClassNamepSelected = (String) comboBoxClassName.getSelectedItem();
 					try {
 						frame.dispose();
-						vSchedule_ClassName window = new vSchedule_ClassName(id, userName, type, cbbLopSelected);
+						vSchedule_ClassName window = new vSchedule_ClassName(id, userName, type, cbbClassNamepSelected);
 						window.frame.setVisible(true);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -147,10 +147,10 @@ public class vMinistry {
 		btnBangDiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBoxClassSubject.getSelectedItem() != null) {
-					String cbbSelected = (String) comboBoxClassSubject.getSelectedItem();
+					String cbbClassSubjectSelected = (String) comboBoxClassSubject.getSelectedItem();
 					try {
 						frame.dispose();
-						vListPoint window = new vListPoint(id, userName, type, cbbSelected);
+						vListPoint window = new vListPoint(id, userName, type, cbbClassSubjectSelected);
 						window.frame.setVisible(true);
 					} catch (IOException e) {
 						e.printStackTrace();

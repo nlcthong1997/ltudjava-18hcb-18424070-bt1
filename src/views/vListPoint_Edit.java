@@ -111,12 +111,12 @@ public class vListPoint_Edit {
 		JButton btnChinhSua = new JButton("Chinh sua");
 		btnChinhSua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String diemGK = txtDiemGK.getText();
-				String diemCK = txtDiemCK.getText();
-				String diemKhac = txtDiemKhac.getText();
-				String diemTong = txtDiemTong.getText();
-				String infoEdited[] = { info[7], info[1], diemGK, diemCK, diemKhac, diemTong };
-				if (!diemGK.equals("") && !diemCK.equals("") && !diemKhac.equals("") && !diemTong.equals("")) {
+				String midtermPoint = txtDiemGK.getText();
+				String endPoint = txtDiemCK.getText();
+				String otherPoint = txtDiemKhac.getText();
+				String totalPoint = txtDiemTong.getText();
+				String infoEdited[] = { info[7], info[1], midtermPoint, endPoint, otherPoint, totalPoint };
+				if (!midtermPoint.equals("") && !endPoint.equals("") && !otherPoint.equals("") && !totalPoint.equals("")) {
 					try {
 						result rs = cPoint.editPointStudent(infoEdited);
 						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
@@ -143,49 +143,80 @@ public class vListPoint_Edit {
 				}
 			}
 		});
+		
+		JButton btnManhHinhDieu = new JButton("Manh hinh dieu khien");
+		btnManhHinhDieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				vMinistry window = new vMinistry(id, userName, type);
+				window.frame.setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(133).addComponent(lblChinhSuaDiem))
-						.addGroup(groupLayout.createSequentialGroup().addGap(76)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(lblDiemGk).addComponent(lblDiemCk))
-												.addGap(32)
-												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-														.addComponent(txtDiemGK).addComponent(txtDiemCK,
-																GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
-										.addGroup(groupLayout.createSequentialGroup()
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(lblDiemKhac).addComponent(lblDiemTong))
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(txtDiemTong, GroupLayout.PREFERRED_SIZE, 179,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(txtDiemKhac, GroupLayout.PREFERRED_SIZE, 179,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(btnChinhSua, Alignment.TRAILING))))))
-				.addContainerGap(101, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(339, Short.MAX_VALUE)
-						.addComponent(btnQuayLai).addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblChinhSuaDiem).addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblDiemGk)
-								.addComponent(txtDiemGK, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblDiemCk)
-								.addComponent(txtDiemCK, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblDiemKhac)
-								.addComponent(txtDiemKhac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblDiemTong)
-								.addComponent(txtDiemTong, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnChinhSua)
-						.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE).addComponent(btnQuayLai)
-						.addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(133)
+							.addComponent(lblChinhSuaDiem))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(76)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblDiemGk)
+										.addComponent(lblDiemCk))
+									.addGap(32)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(txtDiemGK)
+										.addComponent(txtDiemCK, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblDiemKhac)
+										.addComponent(lblDiemTong))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(txtDiemTong, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtDiemKhac, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnChinhSua, Alignment.TRAILING))))))
+					.addContainerGap(91, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(207, Short.MAX_VALUE)
+					.addComponent(btnManhHinhDieu)
+					.addGap(18)
+					.addComponent(btnQuayLai)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblChinhSuaDiem)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDiemGk)
+						.addComponent(txtDiemGK, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDiemCk)
+						.addComponent(txtDiemCK, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDiemKhac)
+						.addComponent(txtDiemKhac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblDiemTong)
+						.addComponent(txtDiemTong, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnChinhSua)
+					.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnQuayLai)
+						.addComponent(btnManhHinhDieu))
+					.addContainerGap())
+		);
 		frame.getContentPane().setLayout(groupLayout);
 
 	}

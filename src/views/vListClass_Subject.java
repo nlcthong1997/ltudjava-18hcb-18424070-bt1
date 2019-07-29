@@ -114,11 +114,11 @@ public class vListClass_Subject {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				if (row >= 0) {
-					String mssv = table.getModel().getValueAt(row, 1).toString();
-					String hoTen = table.getModel().getValueAt(row, 2).toString();
-					String gioiTinh = table.getModel().getValueAt(row, 3).toString();
-					String cmnd = table.getModel().getValueAt(row, 4).toString();
-					String info[] = { mssv, hoTen, gioiTinh, cmnd, cLass };
+					String idStudent = table.getModel().getValueAt(row, 1).toString();
+					String nameStudent = table.getModel().getValueAt(row, 2).toString();
+					String sex = table.getModel().getValueAt(row, 3).toString();
+					String identityCard = table.getModel().getValueAt(row, 4).toString();
+					String info[] = { idStudent, nameStudent, sex, identityCard, cLass };
 					try {
 						result rs = cListClass_Subject.deleteStudentOfClassSubject(info);
 						if (rs.isStatus()) {

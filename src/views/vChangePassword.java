@@ -89,11 +89,11 @@ public class vChangePassword {
 		JButton btnDoiMatKhau = new JButton("Doi mat khau");
 		btnDoiMatKhau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String matKhauMoi = txtMatKhauMoi.getText();
-				String xacNhanMatKhau = txtXacNhanMatKhau.getText();
-				if (matKhauMoi.equals(xacNhanMatKhau)) {
+				String newPassword = txtMatKhauMoi.getText();
+				String confirmPassword = txtXacNhanMatKhau.getText();
+				if (newPassword.equals(confirmPassword)) {
 					try {
-						result rs = cUser.doiMatKhau(id, userName, type, xacNhanMatKhau);
+						result rs = cUser.changePassword(id, userName, type, confirmPassword);
 						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 								JOptionPane.INFORMATION_MESSAGE);
 						txtMatKhauMoi.setText(null);

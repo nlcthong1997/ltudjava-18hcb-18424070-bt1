@@ -110,24 +110,24 @@ public class vListClass_Subject_Add {
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// format : ["mssv", "ho ten", "gioi tinh", "cmmd", "nienkhoa_maMon"]
-				String gioiTinh = "";
+				String sex = "";
 				if (rdbtnNam.isSelected()) {
-					gioiTinh = "Nam";
+					sex = "Nam";
 				} else if (rdbtnNu.isSelected()) {
-					gioiTinh = "Nu";
+					sex = "Nu";
 				} else {
 					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-				String mssv = textMssv.getText();
-				String hoTen = textHoten.getText();
-				String cmnd = textCmnd.getText();
+				String idStudent = textMssv.getText();
+				String nameStudent = textHoten.getText();
+				String identityCard = textCmnd.getText();
 				
-				if (mssv.equals("") || hoTen.equals("") || cmnd.equals("")) {
+				if (idStudent.equals("") || nameStudent.equals("") || identityCard.equals("")) {
 					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					String[] info = new String[] { mssv, hoTen, gioiTinh, cmnd, cLass };
+					String[] info = new String[] { idStudent, nameStudent, sex, identityCard, cLass };
 					try {
 						result rs = cListClass_Subject.insertStudentOfClassSubject(info);
 						if (rs.isStatus()) {
@@ -157,18 +157,29 @@ public class vListClass_Subject_Add {
 			}
 		});
 		
+		JButton btnManHinhDieu = new JButton("Man hinh dieu khien");
+		btnManHinhDieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				vMinistry window = new vMinistry(id, userName, type);
+				window.frame.setVisible(true);;
+			}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(138)
 					.addComponent(lblThemSinhVien)
 					.addContainerGap(136, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(345, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(153, Short.MAX_VALUE)
+					.addComponent(btnManHinhDieu)
+					.addGap(18)
 					.addComponent(btnQuayLai)
 					.addContainerGap())
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(36)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -217,8 +228,10 @@ public class vListClass_Subject_Add {
 						.addComponent(rdbtnNu))
 					.addGap(18)
 					.addComponent(btnThem)
-					.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-					.addComponent(btnQuayLai)
+					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnQuayLai)
+						.addComponent(btnManHinhDieu))
 					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);

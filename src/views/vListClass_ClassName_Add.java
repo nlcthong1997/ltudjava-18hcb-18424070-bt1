@@ -99,25 +99,25 @@ public class vListClass_ClassName_Add {
 		JButton btnThem = new JButton("Them");
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String gioiTinh = "";
+				String sex = "";
 				if (rdbtnNam.isSelected()) {
-					gioiTinh = "Nam";
+					sex = "Nam";
 				} else if (rdbtnNu.isSelected()) {
-					gioiTinh = "Nu";
+					sex = "Nu";
 				} else {
 					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-				String hoTen = txtHoTen.getText();
-				String mssv = txtMssv.getText();
-				String cmnd = txtCmnd.getText();
-				if (hoTen.equals("") || mssv.equals("") || cmnd.equals("")) {
+				String nameStudent = txtHoTen.getText();
+				String idStudent = txtMssv.getText();
+				String identityCard = txtCmnd.getText();
+				if (nameStudent.equals("") || idStudent.equals("") || identityCard.equals("")) {
 					JOptionPane.showMessageDialog(frame, "Ban chua nhap du thong tin.", "Thong bao",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					String info[] = { hoTen, mssv, cmnd, gioiTinh, cLass};
+					String info[] = { nameStudent, idStudent, identityCard, sex, cLass};
 					try {
-						result rs = cListClass_ClassName.themSinhVienTheoKhoa(info);
+						result rs = cListClass_ClassName.addStudentFollowClassName(info);
 						JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 								JOptionPane.INFORMATION_MESSAGE);
 						txtMssv.setText(null);
@@ -143,9 +143,18 @@ public class vListClass_ClassName_Add {
 				
 			}
 		});
+		
+		JButton btnManHinhDieu = new JButton("Man hinh dieu khien");
+		btnManHinhDieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				vMinistry window = new vMinistry(id, userName, type);
+				window.frame.setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -174,9 +183,11 @@ public class vListClass_ClassName_Add {
 										.addComponent(lblCmnd)
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addComponent(txtCmnd, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))))))
-					.addContainerGap(91, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(324, Short.MAX_VALUE)
+					.addContainerGap(112, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(217, Short.MAX_VALUE)
+					.addComponent(btnManHinhDieu)
+					.addGap(18)
 					.addComponent(btnQuayLai)
 					.addContainerGap())
 		);
@@ -205,7 +216,9 @@ public class vListClass_ClassName_Add {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnThem)
 					.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-					.addComponent(btnQuayLai)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnQuayLai)
+						.addComponent(btnManHinhDieu))
 					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);

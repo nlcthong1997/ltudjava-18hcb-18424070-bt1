@@ -19,7 +19,8 @@ public class cListClass_ClassName {
 		return listClass;
 	}
 	
-	public static result themSinhVienTheoKhoa(String[] info) throws IOException {
+	//themSinhVienTheoKhoa
+	public static result addStudentFollowClassName(String[] info) throws IOException {
 		result rs = null;
 		if (dStudent.insertStudentInKhoa(info)) {
 			rs =  new result(true, "Them thanh cong.", "", "", "");

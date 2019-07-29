@@ -86,14 +86,14 @@ public class vListPoint {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				if (row >= 0) {
-					String stt = table.getModel().getValueAt(row, 0).toString();
-					String mssv = table.getModel().getValueAt(row, 1).toString();
-					String hoTen = table.getModel().getValueAt(row, 2).toString();
-					String diemGK = table.getModel().getValueAt(row, 3).toString();
-					String diemCK = table.getModel().getValueAt(row, 4).toString();
-					String diemKhac = table.getModel().getValueAt(row, 5).toString();
-					String diemTong = table.getModel().getValueAt(row, 6).toString();
-					String info[] = { stt, mssv, hoTen, diemGK, diemCK, diemKhac, diemTong, cLass };
+					String id = table.getModel().getValueAt(row, 0).toString();
+					String idStudent = table.getModel().getValueAt(row, 1).toString();
+					String nameStudent = table.getModel().getValueAt(row, 2).toString();
+					String midtermPoint = table.getModel().getValueAt(row, 3).toString();
+					String endPoint = table.getModel().getValueAt(row, 4).toString();
+					String otherPoint = table.getModel().getValueAt(row, 5).toString();
+					String totalPoint = table.getModel().getValueAt(row, 6).toString();
+					String info[] = { id, idStudent, nameStudent, midtermPoint, endPoint, otherPoint, totalPoint, cLass };
 					frame.dispose();
 					vListPoint_Edit window = new vListPoint_Edit(id, userName, type, info);
 					window.frame.setVisible(true);
@@ -131,11 +131,11 @@ public class vListPoint {
 				
 			}
 		});
-		String diemPerCent[] = cPoint.getPointPercent(cLass);
-		JLabel lblTileDau = new JLabel("Ti le dau: " + diemPerCent[0] + "%");
+		String listPerCentPoint[] = cPoint.getPointPercent(cLass);
+		JLabel lblTileDau = new JLabel("Ti le dau: " + listPerCentPoint[0] + "%");
 		lblTileDau.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel lblTileRot = new JLabel("Ti le rot: " + diemPerCent[1] + "%");
+		JLabel lblTileRot = new JLabel("Ti le rot: " + listPerCentPoint[1] + "%");
 		
 		JButton btnQuayLai = new JButton("Quay lai");
 		btnQuayLai.addActionListener(new ActionListener() {
