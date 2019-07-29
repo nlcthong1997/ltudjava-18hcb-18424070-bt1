@@ -310,7 +310,7 @@ public class dStudent {
 	/**
 	 * Format request: info[] = { hoTen, mssv, cmnd, gioiTinh, nienKhoa };
 	 */
-	public static boolean insertStudentInKhoa (String[] info) throws IOException {
+	public static boolean insertStudentInClassName (String[] info) throws IOException {
 		BufferedWriter bw = null;
 		boolean flag = false;
 		try { 

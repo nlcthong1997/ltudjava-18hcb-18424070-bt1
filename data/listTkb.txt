@@ -1,12 +1,12 @@
-1,18,CNPM,Cong nghe pham mem,c32
-2,18,KHMT,Khoa hoc may tinh,c33
-3,18,AI,Tri thong minh nhan tao,c34
-4,18,KNM,Ki nang mem,c22
-5,17,THCS,Tin hoc co so,c31
-6,17,TRR,Toan roi rac,c32
-7,17,MMT,Mang may tinh,c33
-8,19,LTW,Lap trinh websibe,c44
-9,19,HDT,Lap trinh duong doi tuong,c41
-10,18,DLCM,Duong loi cach mang,c42
-11,17,DLCM,Duong loi cach mang,c43
-12,19,DLCM,Duong loi cach mang,c21
+1,18HCB,CNPM,Cong nghe pham mem,c32
+2,18HCB,KHMT,Khoa hoc may tinh,c33
+3,18HCB,AI,Tri thong minh nhan tao,c34
+4,18HCB,KNM,Ki nang mem,c22
+5,17HCB,THCS,Tin hoc co so,c31
+6,17HCB,TRR,Toan roi rac,c32
+7,17HCB,MMT,Mang may tinh,c33
+8,19DT,LTW,Lap trinh websibe,c44
+9,19DT,HDT,Lap trinh duong doi tuong,c41
+10,18DT,DLCM,Duong loi cach mang,c42
+11,17HCB,DLCM,Duong loi cach mang,c43
+12,19HCB,DLCM,Duong loi cach mang,c21

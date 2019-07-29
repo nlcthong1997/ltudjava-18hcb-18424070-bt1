@@ -12,8 +12,11 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
 
 import controllers.cListClass_Subject;
+import controllers.cStudent;
+import models.mPoint;
 import models.mStudent;
 import models.result;
 
@@ -22,6 +25,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class vListClass_Subject {
@@ -84,19 +88,21 @@ public class vListClass_Subject {
 		});
 
 		// handles table list student
-		ArrayList<mStudent> listStudentClassSubject = cListClass_Subject.getListStudentFollowSubject(cLass);
-		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Gioi Tinh", "CMND" };
-		String[][] data = new String[listStudentClassSubject.size()][5];
-		int i = 0;
-		for (mStudent student : listStudentClassSubject) {
-			data[i][0] = student.getId();
-			data[i][1] = student.getIdStudent();
-			data[i][2] = student.getNameStudent();
-			data[i][3] = student.getSex();
-			data[i][4] = student.getIdentityCard();
-			i++;
-		}
-		table = new JTable(data, titles);
+//		ArrayList<mStudent> listStudentClassSubject = cListClass_Subject.getListStudentFollowSubject(cLass);
+//		String[] titles = new String[] { "STT", "MSSV", "Ho ten", "Gioi Tinh", "CMND" };
+//		String[][] data = new String[listStudentClassSubject.size()][5];
+//		int i = 0;
+//		for (mStudent student : listStudentClassSubject) {
+//			data[i][0] = student.getId();
+//			data[i][1] = student.getIdStudent();
+//			data[i][2] = student.getNameStudent();
+//			data[i][3] = student.getSex();
+//			data[i][4] = student.getIdentityCard();
+//			i++;
+//		}
+		table = new JTable();
+		renderDataTable(table, cLass);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 
@@ -124,6 +130,7 @@ public class vListClass_Subject {
 						if (rs.isStatus()) {
 							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 									JOptionPane.INFORMATION_MESSAGE);
+							renderDataTable(table, cLass);
 						} else {
 							JOptionPane.showMessageDialog(frame, rs.getMessage(), "Thong bao",
 									JOptionPane.INFORMATION_MESSAGE);
@@ -170,5 +177,28 @@ public class vListClass_Subject {
 												.addPreferredGap(ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
 												.addComponent(btnQuayLai).addGap(15)))));
 		frame.getContentPane().setLayout(groupLayout);
+	}
+	
+	private void renderDataTable (JTable table, String cLass) throws IOException {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		model.setColumnCount(0);
+		
+		model.addColumn("STT");
+		model.addColumn("MSSV");
+		model.addColumn("Ho ten");
+		model.addColumn("Gioi tinh");
+		model.addColumn("CMND");
+			
+		for (mStudent student : cListClass_Subject.getListStudentFollowSubject(cLass)) {
+			Vector<String> listStudents = new Vector<String>();
+			listStudents.add(student.getId());
+			listStudents.add(student.getIdStudent());
+			listStudents.add(student.getNameStudent());
+			listStudents.add(student.getSex());
+			listStudents.add(student.getIdentityCard());
+			model.addRow(listStudents);
+		}
+		
 	}
 }

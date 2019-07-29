@@ -22,7 +22,7 @@ public class cListClass_ClassName {
 	//themSinhVienTheoKhoa
 	public static result addStudentFollowClassName(String[] info) throws IOException {
 		result rs = null;
-		if (dStudent.insertStudentInKhoa(info)) {
+		if (dStudent.insertStudentInClassName(info)) {
 			rs =  new result(true, "Them thanh cong.", "", "", "");
 		} else {
 			rs =  new result(false, "Them that bai.", "", "", "");
