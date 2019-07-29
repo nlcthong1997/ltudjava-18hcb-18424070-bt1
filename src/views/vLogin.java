@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import controllers.cGiaoVu;
+import controllers.cMinistry;
 import controllers.cLogin;
 import models.result;
 
@@ -88,13 +88,13 @@ public class vLogin {
 						if (rs.getTypeUser().equals("gv")) {
 							//giao vu
 							frame.dispose();
-							vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+							vMinistry window = new vMinistry(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 							window.frame.setVisible(true);
 						} else {
 							//sinh vien
 							frame.dispose();
 							try {
-								vSinhVien window = new vSinhVien(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+								vStudent window = new vStudent(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 								window.frame.setVisible(true);
 							} catch (IOException e1) {
 								e1.printStackTrace();
@@ -117,13 +117,13 @@ public class vLogin {
 				if (rs.isStatus()) {
 					if (rs.getTypeUser().equals("gv")) {
 						frame.dispose();
-						vGiaoVu window = new vGiaoVu(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+						vMinistry window = new vMinistry(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 						window.frame.setVisible(true);
 					} else {
 						// sinh vien
 						frame.dispose();
 						try {
-							vSinhVien window = new vSinhVien(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
+							vStudent window = new vStudent(rs.getIdUser(), rs.getNameUser(), rs.getTypeUser());
 							window.frame.setVisible(true);
 						} catch (IOException e1) {
 							e1.printStackTrace();
