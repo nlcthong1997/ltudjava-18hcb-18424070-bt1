@@ -1,4 +1,4 @@
-1,18HCB,CTT001,Lap Trinh Ung Dung Java,C31
-2,18HCB,CTT002,Mang May Tinh,C31
-3,17HCB,CTT011,Thiet Ke Giao Dien,C32
-4,17HCB,CTT012,Kiem Chung Phan Mem,C32
+1,17HCB,CTT011,Thiet Ke Giao Dien,C32
+2,17HCB,CTT012,Kiem Chung Phan Mem,C32
+3,18HCB,CTT001,Lap Trinh Ung Dung Java,C31
+4,18HCB,CTT002,Mang May Tinh,C31

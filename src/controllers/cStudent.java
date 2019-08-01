@@ -1,3 +1,8 @@
+
+
+
+
+
 package controllers;
 
 import java.io.IOException;
@@ -38,9 +43,11 @@ public class cStudent {
 		}
 		ArrayList<String> listSubject = new ArrayList<String>();
 		for (mSchedule schedule : dSchedule.getListTkb()) {
+			System.out.println(schedule.getClassName() + schedule.getSubjectCode());
 			for (String subjectCode : listSubjectCode) {
-				if (subjectCode.equals(schedule.getSubjectCode()) && !listSubject.contains(schedule.getSubjectName())) {
+				if ((subjectCode.equals(schedule.getSubjectCode()) || subjectCode.equals(schedule.getClassName() + "-" + schedule.getSubjectCode())) && !listSubject.contains(schedule.getSubjectName())) {
 					listSubject.add(schedule.getSubjectName());
+					System.out.println(subjectCode);
 				}
 			}
 		}
