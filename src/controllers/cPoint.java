@@ -53,15 +53,15 @@ public class cPoint {
 		String fallPercent = "0";
 		for (mPoint point : dPoint.getListDiem()) {
 			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1])) {
-				if (Integer.parseInt(point.getTotalPoint()) >= 5) {
+				if (Float.parseFloat(point.getTotalPoint()) >= 5) {
 					passTotal++;
 				}
 				listTotal++;
 			}
 		}
 		if (listTotal != 0) {
-			passPercent = Integer.toString((100 * passTotal) / listTotal);
-			fallPercent = Integer.toString(100 - ((100 * passTotal) / listTotal));
+			passPercent = Float.toString((100 * passTotal) / listTotal);
+			fallPercent = Float.toString(100 - ((100 * passTotal) / listTotal));
 		}
 		String listPointPercent[] = {passPercent, fallPercent};
 		return listPointPercent;
