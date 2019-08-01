@@ -60,28 +60,30 @@ public class cMinistry {
 				}
 			}
 			// auto mapping relationship
-			ArrayList<mStudent> listStudents = dStudent.getListStudent();
-			ArrayList<mSchedule> listSchedules = dSchedule.getListTkb();
-			ArrayList<mStudent> listStudentNew = new ArrayList<mStudent>();
-			if (listStudents.size() != 0 && listSchedules.size() != 0) {
-				for (mStudent student : listStudents) {
-					String subjects = "";
-					for (mSchedule schedule : listSchedules) {
-						if (student.getClassName().equals(schedule.getClassName())) {
-							subjects += schedule.getSubjectCode() + "|";
+			if (!type.equals("bangdiem")) {
+				ArrayList<mStudent> listStudents = dStudent.getListStudent();
+				ArrayList<mSchedule> listSchedules = dSchedule.getListTkb();
+				ArrayList<mStudent> listStudentNew = new ArrayList<mStudent>();
+				if (listStudents.size() != 0 && listSchedules.size() != 0) {
+					for (mStudent student : listStudents) {
+						String subjects = "";
+						for (mSchedule schedule : listSchedules) {
+							if (student.getClassName().equals(schedule.getClassName())) {
+								subjects += schedule.getSubjectCode() + "|";
+							}
 						}
+						if (subjects != "") {
+							subjects = subjects.substring(0, subjects.lastIndexOf("|"));
+						}
+						mStudent studentNew = new mStudent(student.getId(), student.getClassName(), subjects,
+								student.getIdStudent(), student.getNameStudent(), student.getSex(), student.getIdentityCard());
+						listStudentNew.add(studentNew);
 					}
-					if (subjects != "") {
-						subjects = subjects.substring(0, subjects.lastIndexOf("|"));
+					if (dStudent.writeListStudentNew(listStudentNew)) {
+						flag = true;
+					} else {
+						flag = false;
 					}
-					mStudent studentNew = new mStudent(student.getId(), student.getClassName(), subjects,
-							student.getIdStudent(), student.getNameStudent(), student.getSex(), student.getIdentityCard());
-					listStudentNew.add(studentNew);
-				}
-				if (dStudent.writeListStudentNew(listStudentNew)) {
-					flag = true;
-				} else {
-					flag = false;
 				}
 			}
 		}
