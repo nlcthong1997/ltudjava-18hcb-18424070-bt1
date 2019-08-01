@@ -25,7 +25,7 @@ public class cPoint {
 		ArrayList<mPoint> listPoints = new ArrayList<mPoint>();
 		String className_subjectCode[] = cLass.split("\\-");
 		for (mPoint point : dPoint.getListDiem()) {
-			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Integer.parseInt(point.getTotalPoint()) >= 5)) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Float.parseFloat(point.getTotalPoint()) >= 5)) {
 				listPoints.add(point);
 			}
 		}
@@ -37,7 +37,7 @@ public class cPoint {
 		ArrayList<mPoint> listPoints = new ArrayList<mPoint>();
 		String className_subjectCode[] = cLass.split("\\-");
 		for (mPoint point : dPoint.getListDiem()) {
-			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Integer.parseInt(point.getTotalPoint()) < 5)) {
+			if (point.getClassName().equals(className_subjectCode[0]) && point.getSubjectCode().equals(className_subjectCode[1]) && (Float.parseFloat(point.getTotalPoint()) < 5)) {
 				listPoints.add(point);
 			}
 		}
