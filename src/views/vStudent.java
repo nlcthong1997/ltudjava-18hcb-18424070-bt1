@@ -103,7 +103,7 @@ public class vStudent {
 			}
 		});
 
-		JCheckBox chckbxTaCaMon = new JCheckBox("Ta ca mon");
+		JCheckBox chckbxTaCaMon = new JCheckBox("Tat ca mon");
 		chckbxTaCaMon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {

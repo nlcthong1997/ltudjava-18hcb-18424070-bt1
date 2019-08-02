@@ -1,0 +1,6 @@
+Link video huong dan: https://youtu.be/-KU5dzxFZ5s
+
+Mo ta: 
+	Cac file data import nam trong thu muc file-import
+	Thu muc data (database) cua ung dung
+
